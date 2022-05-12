@@ -11,6 +11,8 @@
         android:theme="@style/Theme.Outfit_Catalog_ST10119438_Darshika">
         <activity android:name=".RegisterUser"
             android:exported="false"/>
+        <activity android:name=".ClothesCategory"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

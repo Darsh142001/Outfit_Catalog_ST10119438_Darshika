@@ -9,18 +9,23 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    //Going to need to use this url when it comes to authentication and adding users to realtime database:
+    // https://www.youtube.com/watch?v=Z-RE1QuUWPg&list=PL65Ccv9j4eZJ_bg0TlmxA7ZNbS8IMyl5i&index=4
 
     TextView registerPage;
+    Button goClothesRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         registerPage = (TextView) findViewById(R.id.registerPageTv);
         registerPage.setOnClickListener(this);
 
+        //This button must be deleted. It is here for testing purpose.
+        goClothesRegister = (Button) findViewById(R.id.clothesCatPage);
+        goClothesRegister.setOnClickListener(this);
 
     }
 
@@ -32,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.registerPageTv:
                 startActivity(new Intent(this, RegisterUser.class));
                 break;
+            case R.id.clothesCatPage:
+                startActivity(new Intent(this, ClothesCategory.class));
+
         }
     }
 
