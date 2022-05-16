@@ -1,10 +1,40 @@
 {
   "project_info": {
     "project_number": "178700398529",
+    "firebase_url": "https://outfitcatalog-c22ae-default-rtdb.firebaseio.com",
     "project_id": "outfitcatalog-c22ae",
     "storage_bucket": "outfitcatalog-c22ae.appspot.com"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178700398529:android:f21a5ddcbc6e4178bdc940",
+        "android_client_info": {
+          "package_name": "za.ac.iie.opsc.firebaseprac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178700398529-8is149vagahc12cu9abq38mak6fai4nh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2LCy5EbgfwujyNwMwNKDGX8-aukbAisM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178700398529-8is149vagahc12cu9abq38mak6fai4nh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:178700398529:android:3473117c4a9e0e80bdc940",

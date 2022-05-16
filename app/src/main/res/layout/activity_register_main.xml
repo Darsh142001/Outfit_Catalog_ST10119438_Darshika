@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterUser"
-    android:background="@drawable/background_drawable">
+    tools:context=".RegisterUser">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +13,7 @@
         android:background="@drawable/header_background"
         android:gravity="bottom"
         android:orientation="vertical"
-        android:padding="140dp"
+        android:padding="130dp"
         app:layout_constraintBottom_toTopOf="@+id/fullNameET"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -24,65 +23,73 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <EditText
         android:id="@+id/fullNameET"
-        android:layout_width="299dp"
-        android:layout_height="42dp"
+        android:layout_width="296dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="260dp"
         android:ems="10"
         android:hint="Full Name"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.432" />
-
-    <EditText
-        android:id="@+id/emailET"
-        android:layout_width="298dp"
-        android:layout_height="38dp"
-        android:ems="10"
-        android:hint="Email"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullNameET"
-        app:layout_constraintVertical_bias="0.084" />
-
-    <EditText
-        android:id="@+id/passwordET"
-        android:layout_width="297dp"
-        android:layout_height="39dp"
-        android:ems="10"
-        android:hint="Password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailET"
-        app:layout_constraintVertical_bias="0.111" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/registerBtn"
         android:layout_width="298dp"
         android:layout_height="47dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/rounded_button_drawable"
         android:backgroundTint="#F9AC19"
         android:hint="Register"
         android:onClick="onClickRegister"
         android:text="Sign Up"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordET"
-        app:layout_constraintVertical_bias="0.466" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxAcceptTerm" />
+
+    <CheckBox
+        android:id="@+id/checkBoxAcceptTerm"
+        android:layout_width="201dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="36dp"
+        android:text="I accept the Terms of Use"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordET" />
+
+    <EditText
+        android:id="@+id/emailET"
+        android:layout_width="297dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fullNameET" />
+
+    <EditText
+        android:id="@+id/passwordET"
+        android:layout_width="297dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailET" />
 
     <TextView
         android:id="@+id/loginPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="108dp"
+        android:layout_marginEnd="80dp"
         android:layout_marginBottom="44dp"
         android:text="Login Page"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -97,18 +104,6 @@
         android:text="Have an Account Already?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckBox
-        android:id="@+id/checkBoxAcceptTerm"
-        android:layout_width="201dp"
-        android:layout_height="40dp"
-        android:text="I accept the Terms of Use"
-        app:layout_constraintBottom_toTopOf="@+id/registerBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.271"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordET"
-        app:layout_constraintVertical_bias="0.574" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
