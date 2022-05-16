@@ -13,7 +13,7 @@
         android:background="@drawable/header_background"
         android:gravity="bottom"
         android:orientation="vertical"
-        android:padding="130dp"
+        android:padding="140dp"
         app:layout_constraintBottom_toTopOf="@+id/fullNameET"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -28,7 +28,10 @@
         android:id="@+id/fullNameET"
         android:layout_width="296dp"
         android:layout_height="46dp"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="296dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:drawablePadding="12dp"
         android:ems="10"
         android:hint="Full Name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,26 +39,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/registerBtn"
-        android:layout_width="298dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/rounded_button_drawable"
-        android:backgroundTint="#F9AC19"
-        android:hint="Register"
-        android:onClick="onClickRegister"
-        android:text="Sign Up"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxAcceptTerm" />
-
     <CheckBox
         android:id="@+id/checkBoxAcceptTerm"
         android:layout_width="201dp"
         android:layout_height="40dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
+        android:buttonTint="#F9ac19"
         android:text="I accept the Terms of Use"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.28"
@@ -63,27 +52,49 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordET" />
 
     <EditText
-        android:id="@+id/emailET"
-        android:layout_width="297dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:hint="Email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullNameET" />
-
-    <EditText
         android:id="@+id/passwordET"
         android:layout_width="297dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="28dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="12dp"
         android:ems="10"
         android:hint="Password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailET" />
+
+    <EditText
+        android:id="@+id/emailET"
+        android:layout_width="297dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fullNameET" />
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="297dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_button_drawable"
+        android:hint="Register"
+        android:onClick="onClickRegister"
+        android:text="Sign Up"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxAcceptTerm" />
 
     <TextView
         android:id="@+id/loginPage"
