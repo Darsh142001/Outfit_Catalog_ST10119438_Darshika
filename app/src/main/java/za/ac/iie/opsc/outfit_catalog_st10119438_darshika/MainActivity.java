@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.forgetPasswordTv:
                 startActivity(new Intent(this, ForgetPasswordActivity.class));
-
+                break;
         }
     }
 
