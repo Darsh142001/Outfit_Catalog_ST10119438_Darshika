@@ -66,7 +66,7 @@
         android:layout_height="26dp"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="44dp"
-        android:text="Register page"
+        android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
