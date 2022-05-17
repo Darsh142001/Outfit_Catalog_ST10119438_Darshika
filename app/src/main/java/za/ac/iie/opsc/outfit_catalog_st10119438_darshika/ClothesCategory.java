@@ -26,7 +26,7 @@ public class ClothesCategory extends AppCompatActivity {
     public void logoutClick(View v)
     {
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(ClothesCategory.this, MainActivity.class));
+        startActivity(new Intent(ClothesCategory.this, FrontCoverActivity.class));
     }
 
 }

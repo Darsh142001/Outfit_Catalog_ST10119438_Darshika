@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText password;
 
     TextView registerPage;
-
+    TextView forgetPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         registerPage = (TextView) findViewById(R.id.registerPageTv);
         registerPage.setOnClickListener(this);
 
-
+        forgetPassword = (TextView) findViewById(R.id.forgetPasswordTv);
+        forgetPassword.setOnClickListener(this);
 
     }
 
@@ -54,7 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.registerPageTv:
                 startActivity(new Intent(this, RegisterUser.class));
                 break;
-
+            case R.id.forgetPasswordTv:
+                startActivity(new Intent(this, ForgetPasswordActivity.class));
 
         }
     }
