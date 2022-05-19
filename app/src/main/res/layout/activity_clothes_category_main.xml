@@ -50,12 +50,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/woman_dress2"/>
 
-            <Button
-                android:id="@+id/logoutBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="logoutClick"
-                android:text="Logout" />
+
 
         </LinearLayout>
 

@@ -20,14 +20,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ClothesCategory extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
 
-    //Button logout;
+
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggleOnOff;
     private NavigationView navigationView;
 
-    //
+    //Clothes category
     private ImageView img_pants;
     private ImageView img_shirts;
     private ImageView img_tie;

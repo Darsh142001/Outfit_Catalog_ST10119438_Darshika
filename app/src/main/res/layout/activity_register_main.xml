@@ -30,7 +30,7 @@
         android:layout_height="46dp"
         android:layout_marginTop="296dp"
         android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:drawableStart="@drawable/ic_baseline_person_25"
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="Full Name"
