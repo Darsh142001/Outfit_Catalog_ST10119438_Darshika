@@ -23,7 +23,7 @@ import com.google.firebase.database.annotations.NotNull;
 import java.util.ArrayList;
 
 public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyViewHolder> {
-
+//Must check
     Context context;
     ArrayList<ModelCategory> categoryList;
 

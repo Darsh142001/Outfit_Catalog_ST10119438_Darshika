@@ -35,6 +35,8 @@ import java.util.HashMap;
 
 public class ClothesCategory extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
 
+    //MUST CHECK THE LAYOUT FOLDERS
+
     private FirebaseAuth mAuth;
 
     private Toolbar toolbar;
@@ -157,7 +159,7 @@ private void addCategoryToFirebase()
                 }
             });
 }
-
+//Need to fix
 private void loadCategories(){
         //init arraylist
     categoryArrayList = new ArrayList<>();
