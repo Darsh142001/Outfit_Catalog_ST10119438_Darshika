@@ -24,9 +24,13 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ClothesCategory extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
@@ -43,6 +47,12 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
     EditText clothesCat;
     RecyclerView recycleView;
 
+    //ArrayList to store category
+    private ArrayList<ModelCategory> categoryArrayList;
+
+    //Adapter
+    private AdapterCategory adapterCategory;
+
     /*
     private ImageView img_pants;
     private ImageView img_shirts;
@@ -56,6 +66,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_with_nav_drawer);
         mAuth = FirebaseAuth.getInstance();
+
 
         //logout = findViewById(R.id.logoutBtn);
 
@@ -94,6 +105,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
     public void addCategoryClick(View v)
     {
         validateDate();
+
     }
 
     private String newCategory;
@@ -132,6 +144,8 @@ private void addCategoryToFirebase()
                 public void onSuccess(Void unused) {
                     // category added successfully
                     Toast.makeText(ClothesCategory.this, "Category added successfully", Toast.LENGTH_SHORT).show();
+
+
                 }
             })
             .addOnFailureListener(new OnFailureListener() {
@@ -142,6 +156,37 @@ private void addCategoryToFirebase()
 
                 }
             });
+}
+
+private void loadCategories(){
+        //init arraylist
+    categoryArrayList = new ArrayList<>();
+
+        //Get all categories from the firebase > Categories
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categories");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //clear arraylist before adding data into it
+                categoryArrayList.clear();
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    ModelCategory modCategory = ds.getValue(ModelCategory.class);
+
+                    //Add to arraylist
+                    categoryArrayList.add(modCategory);
+                }
+                //setup adapter
+                adapterCategory = new AdapterCategory(ClothesCategory.this, categoryArrayList);
+                //set adapter to recyclerView
+                recycleView.setAdapter(adapterCategory);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 }
 
 /*
