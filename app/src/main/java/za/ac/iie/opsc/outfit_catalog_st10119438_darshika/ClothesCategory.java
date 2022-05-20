@@ -77,7 +77,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
 
         //Clothing category.
         clothesCat = findViewById(R.id.categoryNameEt);
-        recycleView = findViewById(R.id.recyclerViewClothesCat);
+        recycleView = findViewById(R.id.categoryRecyclerV);
         addCategory = findViewById(R.id.addCategoryBtn);
 
 
@@ -90,6 +90,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         */
     }
 
+    //This button will add the users categories that they add to their profile, will be added into the database as well.
     public void addCategoryClick(View v)
     {
         validateDate();
