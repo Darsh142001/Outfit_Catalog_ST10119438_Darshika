@@ -3,10 +3,14 @@ package za.ac.iie.opsc.outfit_catalog_st10119438_darshika;
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,13 +18,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class ClothesCategory extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
 
-
+    private FirebaseAuth mAuth;
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -28,17 +39,23 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
     private NavigationView navigationView;
 
     //Clothes category
+    Button addCategory;
+    EditText clothesCat;
+    RecyclerView recycleView;
+
+    /*
     private ImageView img_pants;
     private ImageView img_shirts;
     private ImageView img_tie;
     private ImageView img_hoodie;
     private ImageView img_dress;
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_with_nav_drawer);
+        mAuth = FirebaseAuth.getInstance();
 
         //logout = findViewById(R.id.logoutBtn);
 
@@ -59,13 +76,73 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
 
         //Clothing category.
+        clothesCat = findViewById(R.id.categoryNameEt);
+        recycleView = findViewById(R.id.recyclerViewClothesCat);
+        addCategory = findViewById(R.id.addCategoryBtn);
+
+
+        /*
         img_pants = findViewById(R.id.img_pants);
         img_shirts = findViewById(R.id.img_tshirt);
         img_hoodie = findViewById(R.id.img_hoodie);
         img_tie = findViewById(R.id.img_tie);
         img_dress = findViewById(R.id.img_dress);
-
+        */
     }
+
+    public void addCategoryClick(View v)
+    {
+        validateDate();
+    }
+
+    private String newCategory;
+
+    public void validateDate()
+{
+     newCategory = clothesCat.getText().toString().trim();
+    //validate if not empty:
+    //TextUtils.isEmpty(newCategory)
+    //newCategory.isEmpty()
+    if(TextUtils.isEmpty(newCategory)) {
+        Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show();
+    }else{
+        addCategoryToFirebase();
+    }
+}
+
+private void addCategoryToFirebase()
+{
+    //get timestamp.
+    long timestamp = System.currentTimeMillis();
+
+    //setup info to add in firebase db.
+    HashMap<String, Object> hashMap = new HashMap<>();
+    hashMap.put("id", ""+timestamp);
+    hashMap.put("category", ""+newCategory);
+    hashMap.put("timestamp", timestamp);
+    hashMap.put("uid", ""+mAuth.getUid());
+
+    //add to firebase db...Database root > Categories > categoryId > category info
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categories");
+    ref.child(""+timestamp)
+            .setValue(hashMap)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    // category added successfully
+                    Toast.makeText(ClothesCategory.this, "Category added successfully", Toast.LENGTH_SHORT).show();
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    //Category failed to add.
+                    Toast.makeText(ClothesCategory.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+}
+
 /*
     public void logoutClick(View v)
     {
