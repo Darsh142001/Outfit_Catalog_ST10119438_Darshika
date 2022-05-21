@@ -161,6 +161,7 @@ private void addCategoryToFirebase()
             });
 }
 //Need to fix
+    //still does not work
 private void loadCategories(){
         //init arraylist
     categoryArrayList = new ArrayList<>();
