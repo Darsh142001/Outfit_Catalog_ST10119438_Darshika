@@ -80,7 +80,9 @@
                 android:layout_marginEnd="162dp"
                 android:background="@drawable/rounded_button_drawable"
                 android:onClick="addCategoryClick"
-                android:text="Add" />
+                android:text="Add"
+                android:textColor="#020154"
+                android:textStyle="bold" />
 
 
             <androidx.cardview.widget.CardView
@@ -93,7 +95,7 @@
                 android:scrollbars="vertical"
                 app:cardCornerRadius="10dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -114,15 +116,17 @@
                         android:id="@+id/deleteBtn"
                         android:layout_width="52dp"
                         android:layout_height="47dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="4dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="7dp"
+                        android:background="@drawable/rounded_button_drawable"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_baseline_delete_forever_24"
-                        android:background="@drawable/rounded_button_drawable"/>
+                        app:srcCompat="@drawable/ic_baseline_delete_forever_24" />
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
         </RelativeLayout>

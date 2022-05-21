@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Outfit Catalogue."
-        android:textColor="#3C3C3C"
+        android:textColor="#020154"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Get Inspired"
-        android:textColor="#3C3C3C"
+        android:textColor="#020154"
         android:textSize="38sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.096"
@@ -42,6 +42,7 @@
         android:layout_marginTop="60dp"
         android:background="@drawable/rounded_button_drawable"
         android:text="Sign up"
+        android:textColor="#020154"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -54,16 +55,17 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_button_drawable"
         android:text="Sign in"
+        android:textColor="#020154"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="405dp"
-        android:layout_height="412dp"
+        android:layout_width="411dp"
+        android:layout_height="410dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo1" />
+        app:srcCompat="@drawable/new_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

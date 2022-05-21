@@ -122,6 +122,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show();
     }else{
         addCategoryToFirebase();
+
     }
 }
 
