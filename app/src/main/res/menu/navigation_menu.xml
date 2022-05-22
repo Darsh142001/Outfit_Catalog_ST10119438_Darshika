@@ -12,9 +12,9 @@
             android:title="My Goals" />
 
         <item
-            android:id="@+id/nav_outfitLooks"
+            android:id="@+id/nav_addClothes"
             android:icon="@drawable/ic_baseline_checkroom_24"
-            android:title="My Outfit Looks" />
+            android:title="Add clothes" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_baseline_exit_to_app_24"

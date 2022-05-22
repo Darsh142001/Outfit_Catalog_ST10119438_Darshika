@@ -205,6 +205,9 @@ private void loadCategories(){
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(this,  FrontCoverActivity.class));
                 break;
+            case R.id.nav_addClothes:
+                startActivity(new Intent(this, AddClothesToCategory.class));
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
