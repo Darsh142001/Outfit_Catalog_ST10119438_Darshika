@@ -35,8 +35,6 @@ import java.util.HashMap;
 
 public class ClothesCategory extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
 
-    //MUST CHECK THE LAYOUT FOLDERS
-
     private FirebaseAuth mAuth;
 
     private Toolbar toolbar;
@@ -55,13 +53,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
     //Adapter
     private AdapterCategory adapterCategory;
 
-    /*
-    private ImageView img_pants;
-    private ImageView img_shirts;
-    private ImageView img_tie;
-    private ImageView img_hoodie;
-    private ImageView img_dress;
-*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -95,13 +87,6 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         addCategory = findViewById(R.id.addCategoryBtn);
 
 
-        /*
-        img_pants = findViewById(R.id.img_pants);
-        img_shirts = findViewById(R.id.img_tshirt);
-        img_hoodie = findViewById(R.id.img_hoodie);
-        img_tie = findViewById(R.id.img_tie);
-        img_dress = findViewById(R.id.img_dress);
-        */
     }
 
     //This button will add the users categories that they add to their profile, will be added into the database as well.
@@ -167,8 +152,7 @@ private void addCategoryToFirebase()
                 }
             });
 }
-    //Need to fix
-    //still does not work
+
 private void loadCategories(){
         //init arraylist
     categoryArrayList = new ArrayList<>();
@@ -200,13 +184,6 @@ private void loadCategories(){
         });
 }
 
-/*
-    public void logoutClick(View v)
-    {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(ClothesCategory.this, FrontCoverActivity.class));
-    }
-*/
     //The menu appears. But if the back button is pressed, the menu isn't closed as you would expect.
     //Instead, the app is exited. This onBackPressed will fix this issue.
     @Override
