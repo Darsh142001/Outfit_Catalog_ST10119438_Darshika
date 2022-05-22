@@ -69,6 +69,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         setContentView(R.layout.activity_main_with_nav_drawer);
         mAuth = FirebaseAuth.getInstance();
 
+        loadCategories();
 
         //logout = findViewById(R.id.logoutBtn);
 
@@ -132,6 +133,12 @@ private void addCategoryToFirebase()
     long timestamp = System.currentTimeMillis();
 
     //setup info to add in firebase db.
+    /*
+    The java.util.HashMap.put() method of HashMap is used to insert a mapping into a map.
+    This means we can insert a specific key and the value it is mapping to into a particular map.
+    If an existing key is passed then the previous value gets replaced by the new value.
+    If a new pair is passed, then the pair gets inserted as a whole.
+     */
     HashMap<String, Object> hashMap = new HashMap<>();
     hashMap.put("id", ""+timestamp);
     hashMap.put("category", ""+newCategory);
@@ -160,7 +167,7 @@ private void addCategoryToFirebase()
                 }
             });
 }
-//Need to fix
+    //Need to fix
     //still does not work
 private void loadCategories(){
         //init arraylist
@@ -173,7 +180,7 @@ private void loadCategories(){
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //clear arraylist before adding data into it
                 categoryArrayList.clear();
-                for(DataSnapshot ds: snapshot.getChildren()){
+                for(DataSnapshot ds: snapshot.getChildren()){ //A DataSnapshot instance contains data from a Firebase Database location. Any time you read Database data, you receive the data as a DataSnapshot.
                     ModelCategory modCategory = ds.getValue(ModelCategory.class);
 
                     //Add to arraylist

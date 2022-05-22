@@ -35,7 +35,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyView
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.activity_main_with_nav_drawer,parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.activity_row_category,parent, false);
         return new MyViewHolder(v);
     }
 
@@ -50,6 +50,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyView
 
         //Set data
         holder.categoryName.setText(category);
+        //holder.categoryName.setText(modCategory.getCategory());
 
         //Handle click delete
         holder.deleteCategory.setOnClickListener(new View.OnClickListener(){
@@ -112,6 +113,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyView
         return categoryList.size();
     }
 
+    //View holder class to hold UI views for row_category.xml.
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView categoryName;
@@ -119,7 +121,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyView
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
-
+            //init UI Views.
             categoryName = itemView.findViewById(R.id.displayCategoryTv);
             deleteCategory = itemView.findViewById(R.id.deleteBtn);
         }

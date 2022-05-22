@@ -84,8 +84,9 @@
                 android:textColor="#020154"
                 android:textStyle="bold" />
 
-
-            <androidx.cardview.widget.CardView
+            <!--Categories-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoryRecyclerV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/addCategoryBtn"
@@ -93,43 +94,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:scrollbars="vertical"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/activity_row_category" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/displayCategoryTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical"
-                        android:hint="Category Name "
-                        android:textColor="#020154"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
-                        android:id="@+id/deleteBtn"
-                        android:layout_width="52dp"
-                        android:layout_height="47dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="7dp"
-                        android:background="@drawable/rounded_button_drawable"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_baseline_delete_forever_24" />
-
-
-                </RelativeLayout>
-
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
-
+            </RelativeLayout>
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
