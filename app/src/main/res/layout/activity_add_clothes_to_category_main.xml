@@ -50,17 +50,18 @@
         android:orientation="vertical">
 
 
-
         <EditText
+            android:id="@+id/clothingNameET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
+            android:layout_marginTop="80dp"
             android:hint="Enter the name of your clothing"
-            android:layout_marginTop="80dp"/>
+            android:textSize="20sp" />
 
 
         <EditText
+            android:id="@+id/descriptionET"
             android:layout_width="293dp"
             android:layout_height="128dp"
             android:layout_gravity="center_horizontal"
@@ -69,6 +70,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/pickCategory"
             android:layout_width="287dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -110,8 +112,20 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:clickable="true"
+            android:onClick="fabBtnClick"
             android:src="@drawable/ic_baseline_photo_camera_24"
             app:backgroundTint="#F9AC19" />
+
+        <Button
+            android:id="@+id/uploadPicBtn"
+            android:layout_width="271dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_button_drawable"
+            android:text="upload "
+            android:textColor="#020154"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
