@@ -124,6 +124,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:background="@drawable/rounded_button_drawable"
+            android:onClick="uploadPicClick"
             android:text="upload "
             android:textColor="#020154"
             android:textStyle="bold" />

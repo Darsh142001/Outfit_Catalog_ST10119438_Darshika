@@ -6,19 +6,26 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,8 +33,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AddClothesToCategory extends AppCompatActivity implements View.OnClickListener{
 
@@ -44,6 +55,12 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
     ArrayList<ModelCategory> categoryArrayList;
 
+    EditText nameOfClothes;
+    EditText descriptionOfClothes;
+
+    Uri imageUri = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +76,9 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         imgCameraImage = findViewById(R.id.img_cameraImage);
 
         pickCategory = findViewById(R.id.pickCategory);
+
+        nameOfClothes = findViewById(R.id.clothingNameET);
+        descriptionOfClothes = findViewById(R.id.descriptionET);
 
     }
 
@@ -126,6 +146,8 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
                         String category = categoriesArray[which];
                         //set to category textview
                         pickCategory.setText(category);
+
+                        //Log.d(TAG, "onClick: Selected Category: "+category);
                     }
                 })
                 .show();
@@ -169,5 +191,119 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
     }
+
+
+    //NEED TO FIX.
+    // After user has entered the name, description, picked category and taken a photo, it must upload to the storage database.
+
+    //Need to upload the picture with the name, description and category to the database.
+    public void uploadPicClick(View v)
+    {
+        //Validate data
+        validateData();
+
+    }
+
+    private String clothingName="", description="", category="", image="";
+    public void validateData()
+    {
+        //Step 1: validate data
+
+        //get data
+        clothingName = nameOfClothes.getText().toString().trim();
+        description = descriptionOfClothes.getText().toString().trim();
+        category = pickCategory.getText().toString().trim();
+        image = imgCameraImage.toString();
+
+        if(TextUtils.isEmpty(clothingName)){
+            Toast.makeText(this, "Enter name of clothing", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(description)){
+            Toast.makeText(this,"Enter description", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(category)) {
+            Toast.makeText(this, "Pick Category to save your picture in", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(image)){
+            Toast.makeText(this, "Take a photo", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            //All data is valid, can upload to storage now
+            uploadToStorage();
+        }
+    }
+
+    public void uploadToStorage()
+    {
+        //Step 2: Upload picture to firebase
+        //timestamp
+        long timestamp = System.currentTimeMillis();
+
+        //path of pictures in firebase storage
+        String filePathAndName = "Clothes/"+ timestamp;
+
+        //Storage reference
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
+        storageReference.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        //get picture url
+                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                        while(!uriTask.isSuccessful());
+                        String uploadPictureUrl = ""+ uriTask.getResult();
+
+                        //upload to firebase db
+                        uploadPicInfoToDb(uploadPictureUrl, timestamp);
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddClothesToCategory.this, "Failed to upload due to "+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+    }
+
+    public void uploadPicInfoToDb(String uploadPictureUrl, long timestamp)
+    {
+        //Step 3: Upload pic info to firebase db
+
+        String uid = firebaseAuth.getUid();
+
+        //setup data to upload
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("uid", ""+uid);
+        hashMap.put("id", ""+timestamp);
+        hashMap.put("name", ""+clothingName);
+        hashMap.put("description", ""+description);
+        hashMap.put("category", ""+category);
+        hashMap.put("url", ""+uploadPictureUrl);
+        hashMap.put("timestamp", +timestamp);
+
+        //db reference: DB > Clothes
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Clothes");
+        ref.child(""+timestamp)
+                .setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(AddClothesToCategory.this, "Successfully uploaded...", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddClothesToCategory.this, "Failed to upload to db due to "+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
+
 
 }
