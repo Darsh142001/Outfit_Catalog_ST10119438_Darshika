@@ -37,6 +37,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,6 +57,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     private static final int REQUEST_IMAGE_CAPTURE_PERMISSION =100;
 
     FirebaseAuth firebaseAuth;
+    FirebaseStorage mStorage;
 
     ArrayList<ModelCategory> categoryArrayList;
 
@@ -63,6 +65,8 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     EditText descriptionOfClothes;
 
     private Uri imageUri = null;
+    Bitmap bitmap;
+
 
 
     @Override
@@ -71,6 +75,8 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_add_clothes_to_category_main);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        mStorage = FirebaseStorage.getInstance();
+
         loadClotheCategories();
 
         backToMain = findViewById(R.id.backToMainBtn);
@@ -180,10 +186,12 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
+
+
         //Check if we are receiving the result from the right request.
         //Also check whether the data is null, meaning the user may have cancelled.
         if(requestCode == REQUEST_IMAGE_CAPTURE && data !=null){
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            bitmap = (Bitmap) data.getExtras().get("data");
             imgCameraImage.setImageBitmap(bitmap);
         }
     }
@@ -209,8 +217,34 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     public void uploadPicClick(View v)
     {
         //Validate data
-        validateData();
+        //validateData();
 
+        StorageReference ref = mStorage.getReferenceFromUrl("gs://outfitcatalog-c22ae.appspot.com");
+        StorageReference clothesRef = ref.child("pants.jpg"); //pass name of the image + .jpg
+        StorageReference clothesImageRef = ref.child("images/pants.jpg"); //constant folder: call it images
+       // String child = "images/"+ imagename;
+        clothesRef.getName().equals(clothesImageRef.getName());
+        clothesRef.getPath().equals(clothesImageRef.getPath());
+
+
+        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100, byteArray);
+        byte[] food = byteArray.toByteArray();
+
+        UploadTask uploadTask = clothesRef.putBytes(food);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AddClothesToCategory.this,"Failed", Toast.LENGTH_SHORT).show();
+            }
+        })
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+              //  Uri uri = taskSnapshot.get //figure it out Darsh!!!
+                Toast.makeText(AddClothesToCategory.this,"Won", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private String clothingName="", description="", category="";
