@@ -28,7 +28,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SetUserGoals extends AppCompatActivity implements View.OnClickListener{
-
+//This class is will allow users to select their category and set a goal for the specific category they selected.
+//So basically later on, it will allow users to set goals for each category.
+//Example: Lets say user selects pants as the category, and the set goal is 20,
+//In order for the user to reach their goal, they would have to have a list/recycler view
+//of 20 pictures of pants saved.
     TextView pickedCategory;
     EditText goalSetNumber;
     ArrayList<ModelCategory> categoryArrayList;
@@ -48,7 +52,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_user_set_goals);
         mAuth = FirebaseAuth.getInstance();
 
-        //This will load all the categories the user added in the dropdown view.
+        //This will load all the categories the user added earlier in the dropdown view.
         loadCategories();
 
         backToMain = findViewById(R.id.backToMainBtn);
@@ -60,7 +64,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
         displayGoalsRecyclerView = findViewById(R.id.goalsRecyclerV);
 
     }
-
+//If user does not want to set a goal, the back image button will take them back to the activity_main_with_nav_drawer page.
     @Override
     public void onClick(View v) //https://www.youtube.com/watch?v=Z-RE1QuUWPg&list=PL65Ccv9j4eZJ_bg0TlmxA7ZNbS8IMyl5i&index=4
     {
@@ -74,10 +78,12 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
     //This button will allow the user to select the items (categories created earlier) from the dropdown list
     public void pickCategoryClick(View V)
     {
-        categoryPickDialog();
+        categoryPickDialog(); //When the user has selected the category they want, it will display in the textview.
     }
 
-
+    //This method will basically bring back what is displayed in the database,
+    // to be displayed in the activity_main_with_nav_bar activity in the recycler view.
+    //Therefore, the user can see what categories they added.
     private void loadCategories(){
         //init arraylist
         categoryArrayList = new ArrayList<>();
@@ -108,9 +114,9 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
     //This will take the data under Goals and display the category chosen and its set goal.
-
-
+    //This method will take the selected category from the dropdown menu and display it in the textview.
     public void categoryPickDialog()
     {
         //get string array of categories from arraylist
@@ -138,7 +144,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
+//NEED TO FIX!!!!!!!!!!!!
     public void addSetGoalClick(View v)
     {
         validateDate();
@@ -161,12 +167,12 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Please set goal number", Toast.LENGTH_SHORT).show();
         }
         else{
-          addUserSetGoal(); //This will add the selected category and the set number
+          addUserSetGoalToFirebase(); //This will add the selected category and the set number
 
         }
     }
 
-    public void addUserSetGoal()
+    public void addUserSetGoalToFirebase()
     {
         //get timestamp.
         long timestamp = System.currentTimeMillis();

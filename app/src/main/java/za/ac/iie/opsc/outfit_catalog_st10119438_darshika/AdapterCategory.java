@@ -23,7 +23,9 @@ import com.google.firebase.database.annotations.NotNull;
 import java.util.ArrayList;
 
 public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyViewHolder> {
-//Must check
+//This class is used to help display the categories that the user created in a recycler view.
+//It is shown in the activity_main_with_nav_drawer.xml.
+// Reads data from various sources, converts it into View objects and provide it to linked Adapter view for display
     Context context;
     ArrayList<ModelCategory> categoryList;
 
@@ -55,7 +57,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyView
         //Handle click delete
         holder.deleteCategory.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){
+            public void onClick(View v){ //First notifying the user if they want to delete the category they just created or not
                 //confirm delete dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Delete")
@@ -83,6 +85,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyView
 
     }
 
+    //This method will delete the category they created from the recycler view and in the firebase.
     private void deleteCategory(ModelCategory modCategory, MyViewHolder holder){
         //get id of category to delete
         String id = modCategory.getId();
@@ -110,7 +113,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyView
 
     @Override
     public int getItemCount() {
-        return categoryList.size();
+        return categoryList.size(); //This will bring back the correct number of items.
     }
 
     //View holder class to hold UI views for row_category.xml.

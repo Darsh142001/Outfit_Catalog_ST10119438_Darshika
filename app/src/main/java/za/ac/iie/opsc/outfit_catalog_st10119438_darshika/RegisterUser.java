@@ -48,6 +48,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         goLoginPage.setOnClickListener(this);
     }
 
+    //This method is called if the user has already registered and just wants to sign in.
     @Override
     public void onClick(View v) //https://www.youtube.com/watch?v=Z-RE1QuUWPg&list=PL65Ccv9j4eZJ_bg0TlmxA7ZNbS8IMyl5i&index=4
     {
@@ -59,17 +60,20 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+//If the user has not registered, then this button will register them once they filled in their details.
     public void onClickRegister(View view)
     {
         RegisterUser();
     }
 
+    //This method will register the users.
     private void RegisterUser()
     {
        String fullName = userFullName.getText().toString().trim();
        String userEmail = email.getText().toString().trim();
        String userPassword = password.getText().toString().trim();
-
+//The if statements will throw an exception if the user does not fill in everything or forgets to fill in one input.
         if(fullName.isEmpty()){
             userFullName.setError("Surname is required");
             userFullName.requestFocus();
@@ -95,11 +99,14 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             password.requestFocus();
             return;
         }
-
+//If all inputs are filled in, this method will be called.
+//It will take the users inputs and create the account.
         createAccount(fullName, userEmail, userPassword);
 
     }
 
+    //This method will create the account. Once their name. email and password has been entered:
+    //This method will save their details in the firebase database.
     private void createAccount(String fullName, String userEmail, String userPassword)
     {
         mAuth.createUserWithEmailAndPassword(userEmail, userPassword)

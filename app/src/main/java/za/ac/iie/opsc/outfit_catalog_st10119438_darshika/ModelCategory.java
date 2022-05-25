@@ -2,17 +2,16 @@ package za.ac.iie.opsc.outfit_catalog_st10119438_darshika;
 
 public class ModelCategory {
 
+    //Declare variables.
     String id, category, uid;
     long timestamp;
 
     //Constructor empty required for firebase
-
     public ModelCategory()
     {
 
     }
 //Parametrized constructor:
-
     public ModelCategory(String id, String category, String uid, long timestamp) {
         this.id = id;
         this.category = category;

@@ -64,13 +64,11 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         //this method will load and display the category's that the user created in a recycler view.
         loadCategories();
 
-        //logout = findViewById(R.id.logoutBtn);
-
+        //Navigation bar.
         toolbar = findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         drawerLayout = findViewById(R.id.drawer_layout);
         toggleOnOff = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -93,11 +91,11 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
     //This button will add the users categories that they add to their profile, will be added into the database as well.
     public void addCategoryClick(View v)
     {
-        validateDate();
+        validateDate(); //Before the categories can be added, it has to be validated first.
 
     }
 
-    private String newCategory;
+    private String newCategory; //declare new variable.
 
     public void validateDate()
 {
@@ -108,43 +106,43 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
     if(TextUtils.isEmpty(newCategory)) {
         Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show();
     }else{
-        addCategoryToFirebase();
+        addCategoryToFirebase(); //If the input box is not empty, then proceed to adding the category to firebase.
 
     }
 }
 
-private void addCategoryToFirebase()
-{
-    //get timestamp.
-    long timestamp = System.currentTimeMillis();
+    private void addCategoryToFirebase()
+    {
+        //get timestamp.
+        long timestamp = System.currentTimeMillis();
 
-    //setup info to add in firebase db.
-    /*
-    The java.util.HashMap.put() method of HashMap is used to insert a mapping into a map.
-    This means we can insert a specific key and the value it is mapping to into a particular map.
-    If an existing key is passed then the previous value gets replaced by the new value.
-    If a new pair is passed, then the pair gets inserted as a whole.
-     */
-    HashMap<String, Object> hashMap = new HashMap<>();
-    hashMap.put("id", ""+timestamp);
-    hashMap.put("category", ""+newCategory);
-    hashMap.put("timestamp", timestamp);
-    hashMap.put("uid", ""+mAuth.getUid());
+        //setup info to add in firebase db.
+        /*
+        The java.util.HashMap.put() method of HashMap is used to insert a mapping into a map.
+        This means we can insert a specific key and the value it is mapping to into a particular map.
+        If an existing key is passed then the previous value gets replaced by the new value.
+        If a new pair is passed, then the pair gets inserted as a whole.
+        */
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("id", ""+timestamp);
+        hashMap.put("category", ""+newCategory);
+        hashMap.put("timestamp", timestamp);
+        hashMap.put("uid", ""+mAuth.getUid());
 
-    //add to firebase db...Database root > Categories > categoryId > category info
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categories");
-    ref.child(""+timestamp)
-            .setValue(hashMap)
-            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    // category added successfully
-                    Toast.makeText(ClothesCategory.this, "Category added successfully", Toast.LENGTH_SHORT).show();
+        //add to firebase db...Database root > Categories > categoryId > category info
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categories"); //All the categories created by the user will be stored under this path.
+        ref.child(""+timestamp)
+                .setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        // category added successfully
+                        Toast.makeText(ClothesCategory.this, "Category added successfully", Toast.LENGTH_SHORT).show();
 
 
-                }
-            })
-            .addOnFailureListener(new OnFailureListener() {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     //Category failed to add.
@@ -152,11 +150,14 @@ private void addCategoryToFirebase()
 
                 }
             });
-}
+    }
 
-private void loadCategories(){
+    //This method will basically bring back what is displayed in the database,
+    // to be displayed in the activity_main_with_nav_bar activity in the recycler view.
+    //Therefore, the user can see what categories they added.
+    private void loadCategories(){
         //init arraylist
-    categoryArrayList = new ArrayList<>();
+        categoryArrayList = new ArrayList<>();
 
         //Get all categories from the firebase > Categories
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categories");
@@ -183,7 +184,7 @@ private void loadCategories(){
 
             }
         });
-}
+    }
 
     //The menu appears. But if the back button is pressed, the menu isn't closed as you would expect.
     //Instead, the app is exited. This onBackPressed will fix this issue.
@@ -199,21 +200,31 @@ private void loadCategories(){
         }
     }
 
+    //This method used called only when the items from the nav bar are clicked on.
+    //It will direct the user to the correct activity.
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item){
         switch(item.getItemId()){
             case R.id.nav_logout:
                 FirebaseAuth.getInstance().signOut();
+                //Logout of the app.
                 startActivity(new Intent(this,  FrontCoverActivity.class));
                 break;
             case R.id.nav_addClothes:
+                //Take them to the activity that will allow them to add clothes and select the category they would like to save that picture to.
                 startActivity(new Intent(this, AddClothesToCategory.class));
                 break;
             case R.id.nav_goal:
+                //Take them to the activity that will allow the user to give a set goal to the categories they created.
+                //They will select the category from the dropdown that they would like to set a goal for,
+                //Then they can set a number for that specific category. Example: They select pants as the category,
+                //Then they need to give a goal, let's say 20. Therefore in order to reach their goal, they would have to
+                //Take pictures of pants and store it under this category which will be displayed in a recycler view.
+                //If the have 20 pictures of pants that they collected, then they reached their goal.
                 startActivity(new Intent(this, SetUserGoals.class));
                 break;
         }
-        drawerLayout.closeDrawer(GravityCompat.START);
+        drawerLayout.closeDrawer(GravityCompat.START); //If they tap anywhere else on the screen, the nav bar will close.
         return true;
     }
 

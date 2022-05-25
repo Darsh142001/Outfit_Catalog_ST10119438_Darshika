@@ -41,6 +41,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AddClothesToCategory extends AppCompatActivity implements View.OnClickListener{
+//The purpose of this java class, is to allow users, after entering the name, description, selecting the category,
+//from the dropdown, and taken a picture, it must store this in firebase. The picture must be stored in the
+//storage section of the firebase. This is created so that when another user uses this app, they can't see
+//what other clothing collections other users have.
 
     ImageButton backToMain;
     FloatingActionButton fab;
@@ -82,6 +86,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
     }
 
+    //This method is called only when the user wants to go back to the activity_main_with_nav_bar.
     @Override
     public void onClick(View v) //https://www.youtube.com/watch?v=Z-RE1QuUWPg&list=PL65Ccv9j4eZJ_bg0TlmxA7ZNbS8IMyl5i&index=4
     {
@@ -92,11 +97,14 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         }
     }
 
+    //This click method is used for the textview where the user has to select the category they would be adding
+    //clothes too.
     public void pickCategoryClick(View V)
     {
-        categoryPickDialog();
+        categoryPickDialog(); //When the user has selected the category they want, it will display in the textview.
     }
 
+    //This method will bring all the categories that the user added and display it as a dropdown menu.
     public void loadClotheCategories()
     {
         //log.d(TAG, "LoadClotheCategories: Loading clothes categories...");
@@ -127,6 +135,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
     }
 
+    //This method will take the selected category from the dropdown menu and display it in the textview.
     public void categoryPickDialog()
     {
         //get string array of categories from arraylist
@@ -153,7 +162,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
                 .show();
     }
 
-
+//These methods including takePhoto, are allow the user to give permission and then taking a picture of their clothing.
     public void fabBtnClick(View v)
     {
         //Check if we have camera permission.
@@ -193,7 +202,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     }
 
 
-    //NEED TO FIX.
+    //NEED TO FIX!!!!!!
     // After user has entered the name, description, picked category and taken a photo, it must upload to the storage database.
 
     //Need to upload the picture with the name, description and category to the database.
@@ -236,7 +245,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
     public void uploadToStorage()
     {
-        //Step 2: Upload picture to firebase
+        //Step 2: Upload picture to firebase storage.
         //timestamp
         long timestamp = System.currentTimeMillis();
 

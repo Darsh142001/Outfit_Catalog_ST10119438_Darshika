@@ -52,13 +52,13 @@
 
         <EditText
             android:id="@+id/clothingNameET"
-            android:layout_width="wrap_content"
+            android:layout_width="294dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="72dp"
+            android:background="@drawable/custom_input"
             android:hint="Enter the name of your clothing"
-            android:textSize="20sp"
-            android:background="@drawable/custom_input"/>
+            android:textSize="20sp" />
 
 
         <EditText
@@ -74,7 +74,7 @@
         <TextView
             android:id="@+id/pickCategory"
             android:layout_width="287dp"
-            android:layout_height="40dp"
+            android:layout_height="44dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
@@ -84,26 +84,15 @@
             android:background="@drawable/custom_input"/>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="22sp"
-            android:padding="5dp"
-            android:text="Take a Picture"
-            android:textStyle="bold"
-            android:textColor="#020154"
-            android:layout_marginTop="20dp"/>
-
         <androidx.cardview.widget.CardView
             android:layout_width="270dp"
             android:layout_height="167dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="24dp">
 
             <ImageView
                 android:id="@+id/img_cameraImage"
-                android:layout_width="match_parent"
+                android:layout_width="270dp"
                 android:layout_height="match_parent"
                 android:src="@mipmap/ic_launcher_round" />
 
@@ -114,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:clickable="true"
             android:onClick="fabBtnClick"
             android:src="@drawable/ic_baseline_photo_camera_24"
@@ -125,7 +114,7 @@
             android:layout_width="271dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/rounded_button_drawable"
             android:onClick="uploadPicClick"
             android:text="upload "
