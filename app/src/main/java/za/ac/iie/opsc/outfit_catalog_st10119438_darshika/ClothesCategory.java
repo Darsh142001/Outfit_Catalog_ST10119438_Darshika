@@ -61,6 +61,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         setContentView(R.layout.activity_main_with_nav_drawer);
         mAuth = FirebaseAuth.getInstance();
 
+        //this method will load and display the category's that the user created in a recycler view.
         loadCategories();
 
         //logout = findViewById(R.id.logoutBtn);
@@ -207,6 +208,9 @@ private void loadCategories(){
                 break;
             case R.id.nav_addClothes:
                 startActivity(new Intent(this, AddClothesToCategory.class));
+                break;
+            case R.id.nav_goal:
+                startActivity(new Intent(this, SetUserGoals.class));
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

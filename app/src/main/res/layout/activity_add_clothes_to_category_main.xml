@@ -53,11 +53,12 @@
         <EditText
             android:id="@+id/clothingNameET"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="72dp"
             android:hint="Enter the name of your clothing"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:background="@drawable/custom_input"/>
 
 
         <EditText
@@ -67,18 +68,20 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:hint="Enter description for your clothing"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:background="@drawable/custom_input"/>
 
         <TextView
             android:id="@+id/pickCategory"
             android:layout_width="287dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="16dp"
             android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
             android:hint="Clothing Category"
             android:onClick="pickCategoryClick"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:background="@drawable/custom_input"/>
 
 
         <TextView

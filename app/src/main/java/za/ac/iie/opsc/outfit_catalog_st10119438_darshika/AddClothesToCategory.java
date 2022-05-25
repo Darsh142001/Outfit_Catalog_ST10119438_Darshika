@@ -58,7 +58,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     EditText nameOfClothes;
     EditText descriptionOfClothes;
 
-    Uri imageUri = null;
+    private Uri imageUri = null;
 
 
     @Override
@@ -172,7 +172,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     {
         super.onActivityResult(requestCode, resultCode, data);
         //Check if we are receiving the result from the right request.
-        //Also check whether teh data is null, meaning the user may have cancelled.
+        //Also check whether the data is null, meaning the user may have cancelled.
         if(requestCode == REQUEST_IMAGE_CAPTURE && data !=null){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imgCameraImage.setImageBitmap(bitmap);
@@ -204,7 +204,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
     }
 
-    private String clothingName="", description="", category="", image="";
+    private String clothingName="", description="", category="";
     public void validateData()
     {
         //Step 1: validate data
@@ -213,7 +213,8 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         clothingName = nameOfClothes.getText().toString().trim();
         description = descriptionOfClothes.getText().toString().trim();
         category = pickCategory.getText().toString().trim();
-        image = imgCameraImage.toString();
+
+        //image = imgCameraImage.toString();
 
         if(TextUtils.isEmpty(clothingName)){
             Toast.makeText(this, "Enter name of clothing", Toast.LENGTH_SHORT).show();
@@ -224,7 +225,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         else if(TextUtils.isEmpty(category)) {
             Toast.makeText(this, "Pick Category to save your picture in", Toast.LENGTH_SHORT).show();
         }
-        else if(TextUtils.isEmpty(image)){
+        else if(imgCameraImage ==null){
             Toast.makeText(this, "Take a photo", Toast.LENGTH_SHORT).show();
         }
         else{
@@ -244,7 +245,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
         //Storage reference
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
-        storageReference.putFile(imageUri)
+        storageReference.putFile(imageUri) //this part here i don't understand??
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
