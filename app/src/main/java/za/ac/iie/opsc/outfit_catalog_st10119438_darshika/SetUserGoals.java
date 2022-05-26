@@ -111,13 +111,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
                         categoryArrayList.add(modCategory);
                     }
 
-                    //Add to arraylist
-                  //  categoryArrayList.add(modCategory);
                 }
-                //setup adapter
-                //adapterGoalSet = new AdapterGoalSet(SetUserGoals.this, goalSetArrayList);
-                //set adapter to recyclerView
-                //recycleView.setAdapter(adapterGoalSet);
 
             }
 
@@ -157,7 +151,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
     }
 
 
-//NEED TO FIX!!!!!!!!!!!!
+
     public void addSetGoalClick(View v)
     {
         validateDate();
@@ -230,7 +224,8 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
     }
 
     //Load the goals set into the recycler view:
-
+//NEED TO FIX!!!!!!!!!!!!
+    //Probably need to check the activity_row_goals_category. Maybe the setup is incorrect.
     private void loadGoalSet()
     {
         goalsSetArrayList = new ArrayList<>();

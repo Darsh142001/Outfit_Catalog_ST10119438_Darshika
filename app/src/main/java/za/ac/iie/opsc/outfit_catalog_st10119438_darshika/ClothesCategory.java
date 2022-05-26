@@ -182,7 +182,6 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
                     //I think the If statement should go here: We need to only bring back the categories for the user that is logged in.
                     //Therefore, only that specific user will see their categories that they added or add.
 
-
                 }
                 //setup adapter
                 adapterCategory = new AdapterCategory(ClothesCategory.this, categoryArrayList);
