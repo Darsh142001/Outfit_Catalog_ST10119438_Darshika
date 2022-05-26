@@ -36,7 +36,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
 //of 20 pictures of pants saved.
     TextView pickedCategory;
     EditText goalSetNumber;
-    RecyclerView goalsRecyclerV;
+    RecyclerView displayGoalsRecyclerView;
     ArrayList<ModelCategory> categoryArrayList;
 
 
@@ -46,7 +46,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
 
     private FirebaseAuth mAuth;
 
-    RecyclerView displayGoalsRecyclerView;
+    //RecyclerView displayGoalsRecyclerView;
 
     //ArrayList to store goals
     private ArrayList<GoalSetForSelectedCategory> goalsSetArrayList;
@@ -61,7 +61,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
         //This will load all the categories the user added earlier in the dropdown view.
         loadCategories();
 
-        //loadGoalSet();
+        //loadGoalSet(); //did not work
 
         backToMain = findViewById(R.id.backToMainBtn);
         backToMain.setOnClickListener(this);
@@ -161,7 +161,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
     public void addSetGoalClick(View v)
     {
         validateDate();
-
+        //loadGoalSet(); //did not work
     }
 
     private String selectedCategory, inputNumber;
@@ -256,7 +256,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
                 //setup adapter
                 adapterGoalSet = new AdapterGoalSet(SetUserGoals.this, goalsSetArrayList);
                 //set adapter to recyclerView
-                goalsRecyclerV.setAdapter(adapterGoalSet); //this will display the categories that the user added.
+                displayGoalsRecyclerView.setAdapter(adapterGoalSet); //this will display the categories that the user added.
 
             }
 
