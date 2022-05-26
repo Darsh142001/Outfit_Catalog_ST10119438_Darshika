@@ -55,6 +55,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
     private static final int REQUEST_IMAGE_CAPTURE =0;
     private static final int REQUEST_IMAGE_CAPTURE_PERMISSION =100;
+     String IMAGEFOLDER ="ImagesFolder";
 
     FirebaseAuth firebaseAuth;
     FirebaseStorage mStorage;
@@ -214,14 +215,17 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     // After user has entered the name, description, picked category and taken a photo, it must upload to the storage database.
 
     //Need to upload the picture with the name, description and category to the database.
+    private String clothingName="" , description="", category="";
     public void uploadPicClick(View v)
     {
         //Validate data
         //validateData();
-
+        clothingName = nameOfClothes.getText().toString().trim();
         StorageReference ref = mStorage.getReferenceFromUrl("gs://outfitcatalog-c22ae.appspot.com");
-        StorageReference clothesRef = ref.child("pants.jpg"); //pass name of the image + .jpg
-        StorageReference clothesImageRef = ref.child("images/pants.jpg"); //constant folder: call it images
+        StorageReference clothesRef = ref.child(clothingName+".jpg"); //pass name of the image + .jpg //"pants.jpg"
+        StorageReference clothesImageRef = ref.child("Images/"+clothesRef);
+        //StorageReference clothesImageRef = ref.child(IMAGEFOLDER+"/"+clothesRef);
+        //StorageReference clothesImageRef = ref.child("images/pants.jpg"); //constant folder: call it images
        // String child = "images/"+ imagename;
         clothesRef.getName().equals(clothesImageRef.getName());
         clothesRef.getPath().equals(clothesImageRef.getPath());
@@ -229,9 +233,9 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
         ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100, byteArray);
-        byte[] food = byteArray.toByteArray();
+        byte[] data = byteArray.toByteArray();
 
-        UploadTask uploadTask = clothesRef.putBytes(food);
+        UploadTask uploadTask = clothesRef.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -241,12 +245,15 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-              //  Uri uri = taskSnapshot.get //figure it out Darsh!!!
+                //When the image has successfully uploaded, we get its download url
+              // Uri uri = taskSnapshot.getDownloadUrl();//figure it out Darsh!!!
+                clothesRef.getDownloadUrl();
                 Toast.makeText(AddClothesToCategory.this,"Won", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    /*
     private String clothingName="", description="", category="";
     public void validateData()
     {
@@ -276,7 +283,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
             uploadToStorage();
         }
     }
-
+*/
     public void uploadToStorage()
     {
         //Step 2: Upload picture to firebase storage.
