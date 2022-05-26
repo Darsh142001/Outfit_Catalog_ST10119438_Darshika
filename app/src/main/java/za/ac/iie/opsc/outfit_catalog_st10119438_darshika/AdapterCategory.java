@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.annotations.NotNull;
@@ -28,6 +30,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyView
 // Reads data from various sources, converts it into View objects and provide it to linked Adapter view for display
     Context context;
     ArrayList<ModelCategory> categoryList;
+
 
     public AdapterCategory(Context context, ArrayList<ModelCategory> categoryList) {
         this.context = context;
@@ -49,10 +52,12 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyView
         String category = modCategory.getCategory();
         String uid = modCategory.getUid();
         long timestamp = modCategory.getTimestamp();
+        String email = modCategory.getEmail();
 
-        //Set data
-        holder.categoryName.setText(category);
-        //holder.categoryName.setText(modCategory.getCategory());
+
+            //Set data
+            holder.categoryName.setText(category);
+            //holder.categoryName.setText(modCategory.getCategory());
 
         //Handle click delete
         holder.deleteCategory.setOnClickListener(new View.OnClickListener(){
@@ -125,6 +130,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyView
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             //init UI Views.
+            //Or maybe the If statement should come here. Need to check that the logged in user's email and the email saved when they added their categry match.
             categoryName = itemView.findViewById(R.id.displayCategoryTv);
             deleteCategory = itemView.findViewById(R.id.deleteBtn);
         }

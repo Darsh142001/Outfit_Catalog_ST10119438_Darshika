@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +38,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
 
     private FirebaseAuth mAuth;
 
+    //Nav bar
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggleOnOff;
@@ -52,6 +54,8 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
 
     //Adapter
     private AdapterCategory adapterCategory;
+
+
 
 
     @Override
@@ -70,8 +74,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         drawerLayout = findViewById(R.id.drawer_layout);
-        toggleOnOff = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggleOnOff = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggleOnOff);
         toggleOnOff.syncState();
 
@@ -84,6 +87,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         clothesCat = findViewById(R.id.categoryNameEt);
         recycleView = findViewById(R.id.categoryRecyclerV);
         addCategory = findViewById(R.id.addCategoryBtn);
+
 
 
     }
@@ -101,8 +105,6 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
 {
      newCategory = clothesCat.getText().toString().trim();
     //validate if not empty:
-    //TextUtils.isEmpty(newCategory)
-    //newCategory.isEmpty()
     if(TextUtils.isEmpty(newCategory)) {
         Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show();
     }else{
@@ -111,8 +113,9 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
     }
 }
 
-    private void addCategoryToFirebase()
+    private void addCategoryToFirebase() //this method will add the category the user created to firebase and be stored under Categories.
     {
+        FirebaseUser user = mAuth.getCurrentUser();
         //get timestamp.
         long timestamp = System.currentTimeMillis();
 
@@ -128,6 +131,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         hashMap.put("category", ""+newCategory);
         hashMap.put("timestamp", timestamp);
         hashMap.put("uid", ""+mAuth.getUid());
+        hashMap.put("email", ""+user.getEmail()); //This will display the email of the logged in user. This will show which user added which category.
 
         //add to firebase db...Database root > Categories > categoryId > category info
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categories"); //All the categories created by the user will be stored under this path.
@@ -155,9 +159,11 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
     //This method will basically bring back what is displayed in the database,
     // to be displayed in the activity_main_with_nav_bar activity in the recycler view.
     //Therefore, the user can see what categories they added.
+    //Need to load only the categories of the logged in user.
     private void loadCategories(){
         //init arraylist
         categoryArrayList = new ArrayList<>();
+        FirebaseUser user = mAuth.getCurrentUser();
 
         //Get all categories from the firebase > Categories
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categories");
@@ -168,14 +174,20 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
                 categoryArrayList.clear();
                 for(DataSnapshot ds: snapshot.getChildren()){ //A DataSnapshot instance contains data from a Firebase Database location. Any time you read Database data, you receive the data as a DataSnapshot.
                     ModelCategory modCategory = ds.getValue(ModelCategory.class);
+                    if(user.getEmail().equals(modCategory.getEmail()))
+                    {
+                        //Add to arraylist
+                        categoryArrayList.add(modCategory);
+                    }
+                    //I think the If statement should go here: We need to only bring back the categories for the user that is logged in.
+                    //Therefore, only that specific user will see their categories that they added or add.
 
-                    //Add to arraylist
-                    categoryArrayList.add(modCategory);
+
                 }
                 //setup adapter
                 adapterCategory = new AdapterCategory(ClothesCategory.this, categoryArrayList);
                 //set adapter to recyclerView
-                recycleView.setAdapter(adapterCategory);
+                recycleView.setAdapter(adapterCategory); //this will display the categories that the user added.
 
             }
 

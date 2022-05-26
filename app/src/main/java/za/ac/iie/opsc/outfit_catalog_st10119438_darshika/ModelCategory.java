@@ -3,7 +3,7 @@ package za.ac.iie.opsc.outfit_catalog_st10119438_darshika;
 public class ModelCategory {
 
     //Declare variables.
-    String id, category, uid;
+    String id, category, uid, email;
     long timestamp;
 
     //Constructor empty required for firebase
@@ -12,11 +12,12 @@ public class ModelCategory {
 
     }
 //Parametrized constructor:
-    public ModelCategory(String id, String category, String uid, long timestamp) {
+    public ModelCategory(String id, String category, String uid, long timestamp, String email) {
         this.id = id;
         this.category = category;
         this.uid = uid;
         this.timestamp = timestamp;
+        this.email = email;
     }
 
     //Getters & setters:
@@ -52,4 +53,7 @@ public class ModelCategory {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
+
+    public String getEmail(){return email;}
+    public void setEmail(){this.email = email;}
 }

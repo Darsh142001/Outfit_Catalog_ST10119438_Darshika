@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -38,6 +39,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -55,7 +57,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
     private static final int REQUEST_IMAGE_CAPTURE =0;
     private static final int REQUEST_IMAGE_CAPTURE_PERMISSION =100;
-     String IMAGEFOLDER ="ImagesFolder";
+     String IMAGEFOLDER="ImagesFolder";
 
     FirebaseAuth firebaseAuth;
     FirebaseStorage mStorage;
@@ -224,12 +226,14 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         StorageReference ref = mStorage.getReferenceFromUrl("gs://outfitcatalog-c22ae.appspot.com");
         StorageReference clothesRef = ref.child(clothingName+".jpg"); //pass name of the image + .jpg //"pants.jpg"
         StorageReference clothesImageRef = ref.child("Images/"+clothesRef);
-        //StorageReference clothesImageRef = ref.child(IMAGEFOLDER+"/"+clothesRef);
         //StorageReference clothesImageRef = ref.child("images/pants.jpg"); //constant folder: call it images
        // String child = "images/"+ imagename;
-        clothesRef.getName().equals(clothesImageRef.getName());
-        clothesRef.getPath().equals(clothesImageRef.getPath());
+        clothesRef.getName().equals(clothesImageRef.getName()); //true
+        clothesRef.getPath().equals(clothesImageRef.getPath()); //false
 
+        imgCameraImage.setDrawingCacheEnabled(true);
+        imgCameraImage.buildDrawingCache();
+        bitmap =((BitmapDrawable) imgCameraImage.getDrawable()).getBitmap();
 
         ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100, byteArray);
@@ -245,9 +249,9 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                //When the image has successfully uploaded, we get its download url
+                //When the image has successfully uploaded, we get its download url. (Uri can only be used on saved content.)
               // Uri uri = taskSnapshot.getDownloadUrl();//figure it out Darsh!!!
-                clothesRef.getDownloadUrl();
+               // clothesRef.getDownloadUrl();
                 Toast.makeText(AddClothesToCategory.this,"Won", Toast.LENGTH_SHORT).show();
             }
         });

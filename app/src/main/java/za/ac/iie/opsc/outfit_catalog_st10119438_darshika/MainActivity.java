@@ -53,10 +53,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(v.getId())
         {
             case R.id.registerPageTv:
-                startActivity(new Intent(this, RegisterUser.class));
+                startActivity(new Intent(this, RegisterUser.class)); //This will direct the user back to the register page if they haven't registered.
                 break;
             case R.id.forgetPasswordTv:
-                startActivity(new Intent(this, ForgetPasswordActivity.class));
+                startActivity(new Intent(this, ForgetPasswordActivity.class)); //This will direct the user to the forget password activity page so that they can reset their password.
                 break;
         }
     }
@@ -64,9 +64,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void loginClick(View view)
     {
         LoginUser();
+
     }
 
-    private void LoginUser()
+    public void LoginUser() //this method will first ensure that the user had entered in all the fields before proceeding.
     {
         String userEmail = email.getText().toString().trim();
         String userPassword = password.getText().toString().trim();
@@ -92,10 +93,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        signIn(userEmail, userPassword);
+        signIn(userEmail, userPassword); //they they filled in all the fields correctly, they will be logged in.
     }
 
-    private void signIn(String email, String password){
+    public void signIn(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>(){
                     @Override
@@ -105,19 +106,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             if(user.isEmailVerified()){
-
                                 //redirect user to Menu activity.
                                 startActivity(new Intent(MainActivity.this, ClothesCategory.class)); //check AndroidManifest.
+                                Toast.makeText(MainActivity.this, "user is: "+user.getEmail(), Toast.LENGTH_LONG).show();
+
                             }else{
                                 user.sendEmailVerification();
                                 Toast.makeText(MainActivity.this, "Check your email to verify your account!", Toast.LENGTH_LONG).show();
                             }
-                            //Toast.makeText(LoginActivity.this, "Authentication Successful.", Toast.LENGTH_SHORT).show();
 
-                            //updateUI(user);
                         }else{
                             Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+
                         }
                     }
                 });
