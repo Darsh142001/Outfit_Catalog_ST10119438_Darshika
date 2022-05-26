@@ -2,7 +2,7 @@ package za.ac.iie.opsc.outfit_catalog_st10119438_darshika;
 
 public class GoalSetForSelectedCategory {
 
-    String id, category, SetGoal, uid;
+    String id, category, SetGoal, uid,email;
     long timestamp;
 
     public GoalSetForSelectedCategory()
@@ -10,13 +10,14 @@ public class GoalSetForSelectedCategory {
 
     }
 
-    public GoalSetForSelectedCategory(String id, String category, String SetGoal, String uid, long timestamp)
+    public GoalSetForSelectedCategory(String id, String category, String SetGoal, String uid, long timestamp, String email)
     {
         this.id = id;
         this.category = category;
         this.SetGoal = SetGoal;
         this.uid = uid;
         this.timestamp = timestamp;
+        this.email = email;
     }
 
     public String getId() {
@@ -58,4 +59,8 @@ public class GoalSetForSelectedCategory {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
+
+    public String getEmail(){return email;}
+
+    public void setEmail(){this.email = email;}
 }

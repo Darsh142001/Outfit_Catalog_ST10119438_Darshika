@@ -33,14 +33,14 @@ public class AdapterGoalSet extends RecyclerView.Adapter<AdapterGoalSet.MyViewHo
 
     @NonNull
     @Override
-    public AdapterGoalSet.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.activity_row_goals_category,parent, false);
-        return new AdapterGoalSet.MyViewHolder(v);
+        return new MyViewHolder(v);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterGoalSet.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         GoalSetForSelectedCategory goalCategory = goalSetArrayList.get(position);
         String id = goalCategory.getId();
@@ -48,6 +48,7 @@ public class AdapterGoalSet extends RecyclerView.Adapter<AdapterGoalSet.MyViewHo
         String SetGoal = goalCategory.getSetGoal();
         String uid = goalCategory.getUid();
         long timestamp = goalCategory.getTimestamp();
+        String email = goalCategory.getEmail();
 
         //Set data
         holder.selectedCategory.setText(category);
@@ -60,7 +61,7 @@ public class AdapterGoalSet extends RecyclerView.Adapter<AdapterGoalSet.MyViewHo
                 //confirm delete dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Delete")
-                        .setMessage("Are you sure you want to delete this category")
+                        .setMessage("Are you sure you want to delete this Goal")
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which){

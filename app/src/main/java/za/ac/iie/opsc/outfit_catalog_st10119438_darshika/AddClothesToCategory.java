@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,7 +62,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
     FirebaseAuth firebaseAuth;
     FirebaseStorage mStorage;
-
+    //private FirebaseAuth mAuth;
     ArrayList<ModelCategory> categoryArrayList;
 
     EditText nameOfClothes;
@@ -118,6 +119,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     {
         //log.d(TAG, "LoadClotheCategories: Loading clothes categories...");
         categoryArrayList = new ArrayList<>();
+        FirebaseUser user = firebaseAuth .getCurrentUser();
         //db reference to load categories...db > Categories
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categories");
 
@@ -129,7 +131,12 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
                     //get data
                     ModelCategory modCategory = ds.getValue(ModelCategory.class);
                     //add to arraylist
-                    categoryArrayList.add(modCategory);
+                    if(user.getEmail().equals(modCategory.getEmail()))
+                    {
+                        //Add to arraylist
+                        categoryArrayList.add(modCategory);
+                    }
+                    //categoryArrayList.add(modCategory);
 
                     //log.d(TAG, "onDataChanged: "+modCategory.getCategory());
                 }
