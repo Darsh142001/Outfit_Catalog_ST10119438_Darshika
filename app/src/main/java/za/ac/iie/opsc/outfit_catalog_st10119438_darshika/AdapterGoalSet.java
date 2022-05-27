@@ -34,7 +34,7 @@ public class AdapterGoalSet extends RecyclerView.Adapter<AdapterGoalSet.MyViewHo
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.activity_row_goals_category,parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.activity_row_goals_category,parent, false); //activity_row_goals_category
         return new MyViewHolder(v);
     }
 
@@ -121,7 +121,7 @@ public class AdapterGoalSet extends RecyclerView.Adapter<AdapterGoalSet.MyViewHo
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView selectedCategory;
-        EditText inputGoalNumber;
+        TextView inputGoalNumber;
         ImageButton deleteGoalSet;
 
         public MyViewHolder(@NonNull View itemView){
