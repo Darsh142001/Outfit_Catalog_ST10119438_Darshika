@@ -37,7 +37,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
     TextView pickedCategory;
     EditText goalSetNumber;
     RecyclerView displayGoalsRecyclerView;
-    TextView viewGoals;
+
 
     ArrayList<ModelCategory> categoryArrayList;
     AdapterGoalSet adapterGoalSet;
@@ -46,11 +46,8 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
 
     private FirebaseAuth mAuth;
 
-    //RecyclerView displayGoalsRecyclerView;
-
     //ArrayList to store goals
     private ArrayList<GoalSetForSelectedCategory> goalsSetArrayList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +63,6 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
         backToMain = findViewById(R.id.backToMainBtn);
         backToMain.setOnClickListener(this);
 
-        viewGoals = findViewById(R.id.viewGoalsSetBtn);
-        viewGoals.setOnClickListener(this);
-
         pickedCategory = findViewById(R.id.pickCategory);
         goalSetNumber = findViewById(R.id.goalNumberET);
 
@@ -82,10 +76,6 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
         switch(v.getId()) {
             case R.id.backToMainBtn:
                 startActivity(new Intent(this, ClothesCategory.class)); //This will go back to the activity with the nav bar.
-                break;
-
-            case R.id.viewGoalsSetBtn:
-                startActivity(new Intent(this, ViewGoals.class));
                 break;
         }
     }
@@ -158,15 +148,12 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     public void addSetGoalClick(View v)
     {
         validateDate();
-        //loadGoalSet(); //did not work
     }
 
     private String selectedCategory, inputNumber;
-
     public void validateDate()
     {
         selectedCategory = pickedCategory.getText().toString().trim();
@@ -231,9 +218,6 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
     }
 
     //Load the goals set into the recycler view:
-//NEED TO FIX!!!!!!!!!!!!
-    //Probably need to check the activity_row_goals_category. Maybe the setup is incorrect.
-
     private void loadGoalSet()
     {
         goalsSetArrayList = new ArrayList<>();
