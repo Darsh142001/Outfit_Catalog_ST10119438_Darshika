@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,9 @@ public class FrontCoverActivity extends AppCompatActivity implements View.OnClic
 
     Button signUp;
     Button signIn;
+
+    private long backPressedTime;
+    private Toast backToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,25 @@ public class FrontCoverActivity extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(this, MainActivity.class)); //This page will take them to the login activity/main activity.
                 break;
         }
+    }
+
+    //int counter =0;
+    @Override
+    public void onBackPressed() //If user wants to exit this app from the front cover, they have to press the back button twice.
+    {
+        if(backPressedTime + 2000 > System.currentTimeMillis())
+        {
+            backToast.cancel();
+            super.onBackPressed();
+            return;
+        }else{
+            backToast= Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
+        //counter++;
+        //if(counter ==2)
+         //super.onBackPressed();
     }
 
 }

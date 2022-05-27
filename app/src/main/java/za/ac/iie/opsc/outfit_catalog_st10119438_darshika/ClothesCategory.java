@@ -207,7 +207,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
             drawerLayout.closeDrawer(GravityCompat.START);
         }else{
             //otherwise, let the super class handle it
-            super.onBackPressed();
+            //super.onBackPressed();
         }
     }
 

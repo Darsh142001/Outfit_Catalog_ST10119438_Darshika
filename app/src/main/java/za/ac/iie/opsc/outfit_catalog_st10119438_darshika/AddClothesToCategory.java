@@ -259,7 +259,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
                 //When the image has successfully uploaded, we get its download url. (Uri can only be used on saved content.)
               // Uri uri = taskSnapshot.getDownloadUrl();//figure it out Darsh!!!
                // clothesRef.getDownloadUrl();
-                Toast.makeText(AddClothesToCategory.this,"Won", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddClothesToCategory.this,"Uploaded", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -365,6 +365,12 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() //Therefore user cannot press the back button on their phone. they have to use the icon.
+    {
+        // super.onBackPressed();
     }
 
 

@@ -16,6 +16,10 @@
             android:icon="@drawable/ic_baseline_checkroom_24"
             android:title="Add clothes" />
         <item
+            android:id="@+id/nav_viewClothes"
+            android:icon="@drawable/ic_baseline_remove_red_eye_24"
+            android:title="View Clothes" />
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_baseline_exit_to_app_24"
             android:title="Logout" />

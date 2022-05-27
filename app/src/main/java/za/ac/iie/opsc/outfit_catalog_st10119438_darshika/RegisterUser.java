@@ -136,6 +136,12 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 });
     }
 
+    @Override
+    public void onBackPressed() //Therefore user cannot press the back button on their phone. they have to use the icon.
+    {
+        // super.onBackPressed();
+    }
+
 
 
 }
