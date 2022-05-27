@@ -86,6 +86,17 @@
             android:textColor="#020154"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/viewGoalsSetBtn"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
+            android:text="View Goals"
+            android:textColor="#020154"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
         <View
             android:layout_width="wrap_content"
             android:layout_height="3dp"

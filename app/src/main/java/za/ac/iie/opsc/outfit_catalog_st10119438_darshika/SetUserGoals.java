@@ -37,9 +37,9 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
     TextView pickedCategory;
     EditText goalSetNumber;
     RecyclerView displayGoalsRecyclerView;
+    TextView viewGoals;
+
     ArrayList<ModelCategory> categoryArrayList;
-
-
     AdapterGoalSet adapterGoalSet;
 
     ImageButton backToMain;
@@ -65,6 +65,9 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
 
         backToMain = findViewById(R.id.backToMainBtn);
         backToMain.setOnClickListener(this);
+
+        viewGoals = findViewById(R.id.viewGoalsSetBtn);
+
 
         pickedCategory = findViewById(R.id.pickCategory);
         goalSetNumber = findViewById(R.id.goalNumberET);
@@ -262,5 +265,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
         });
 
     }
+
+
 
 }
