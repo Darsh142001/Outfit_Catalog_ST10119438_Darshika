@@ -29,6 +29,9 @@ public class ViewClothesActivity extends AppCompatActivity implements View.OnCli
 
     TextView pickCat;
 
+    ArrayList<ViewClothesCategory> clothesArrayList;
+    ViewClothesAdapter adapterViewClothes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +118,46 @@ public class ViewClothesActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    //Need to create a method that will retrieve the data and display it in a recycler view.
+    /*
+public void loadViewClothesCategory()
+{
 
+    clothesArrayList = new ArrayList<>();
+    FirebaseUser user = mAuth.getCurrentUser();
+
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Goals");
+    ref.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            //clear arraylist before adding data into it
+            clothesArrayList.clear();
+            for(DataSnapshot ds: snapshot.getChildren()){ //A DataSnapshot instance contains data from a Firebase Database location. Any time you read Database data, you receive the data as a DataSnapshot.
+                GoalSetForSelectedCategory goalCategory = ds.getValue(GoalSetForSelectedCategory.class);
+                if(user.getEmail().equals(goalCategory.getEmail()))
+                {
+                    //Add to arraylist
+                    clothesArrayList.add(goalCategory);
+                }
+                //I think the If statement should go here: We need to only bring back the categories for the user that is logged in.
+                //Therefore, only that specific user will see their categories that they added or add.
+
+            }
+            //setup adapter
+            adapterGoalSet = new AdapterGoalSet(SetUserGoals.this, goalsSetArrayList);
+            //set adapter to recyclerView
+            displayGoalsRecyclerView.setAdapter(adapterGoalSet); //this will display the categories that the user added.
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    });
+
+}
+*/
 
     @Override
     public void onBackPressed() //Therefore user cannot press the back button on their phone. they have to use the icon.
