@@ -220,11 +220,9 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     }
 
 
-    //NEED TO FIX!!!!!!
-    // After user has entered the name, description, picked category and taken a photo, it must upload to the storage database.
-
     //Need to upload the picture with the name, description and category to the database.
     private String clothingName="" , description="", category="";
+
     public void uploadPicClick(View v)
     {
         long timestamp = System.currentTimeMillis();
