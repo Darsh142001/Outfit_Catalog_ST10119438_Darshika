@@ -58,7 +58,8 @@
             android:layout_marginTop="72dp"
             android:background="@drawable/custom_input"
             android:hint="Enter the name of your clothing"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:gravity="center_horizontal"/>
 
 
         <EditText
@@ -69,7 +70,8 @@
             android:layout_marginTop="15dp"
             android:hint="Enter description for your clothing"
             android:textSize="20sp"
-            android:background="@drawable/custom_input"/>
+            android:background="@drawable/custom_input"
+            android:gravity="center_horizontal"/>
 
         <TextView
             android:id="@+id/pickCategory"
@@ -81,7 +83,8 @@
             android:hint="Clothing Category"
             android:onClick="pickCategoryClick"
             android:textSize="22sp"
-            android:background="@drawable/custom_input"/>
+            android:background="@drawable/custom_input"
+            android:gravity="center_horizontal"/>
 
 
         <androidx.cardview.widget.CardView

@@ -264,37 +264,6 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         });
     }
 
-    /*
-    private String clothingName="", description="", category="";
-    public void validateData()
-    {
-        //Step 1: validate data
-
-        //get data
-        clothingName = nameOfClothes.getText().toString().trim();
-        description = descriptionOfClothes.getText().toString().trim();
-        category = pickCategory.getText().toString().trim();
-
-        //image = imgCameraImage.toString();
-
-        if(TextUtils.isEmpty(clothingName)){
-            Toast.makeText(this, "Enter name of clothing", Toast.LENGTH_SHORT).show();
-        }
-        else if(TextUtils.isEmpty(description)){
-            Toast.makeText(this,"Enter description", Toast.LENGTH_SHORT).show();
-        }
-        else if(TextUtils.isEmpty(category)) {
-            Toast.makeText(this, "Pick Category to save your picture in", Toast.LENGTH_SHORT).show();
-        }
-        else if(imgCameraImage ==null){
-            Toast.makeText(this, "Take a photo", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            //All data is valid, can upload to storage now
-            uploadToStorage();
-        }
-    }
-*/
     public void uploadToStorage()
     {
         //Step 2: Upload picture to firebase storage.

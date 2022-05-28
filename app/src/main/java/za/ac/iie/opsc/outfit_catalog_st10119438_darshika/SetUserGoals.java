@@ -89,7 +89,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
     //This method will basically bring back what is displayed in the database,
     // to be displayed in the activity_main_with_nav_bar activity in the recycler view.
     //Therefore, the user can see what categories they added.
-    private void loadCategories(){
+    public void loadCategories(){
         //init arraylist
         categoryArrayList = new ArrayList<>();
         FirebaseUser user = mAuth.getCurrentUser();

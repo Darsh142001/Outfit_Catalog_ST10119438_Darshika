@@ -56,8 +56,6 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
     private AdapterCategory adapterCategory;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -199,6 +197,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
 
     //The menu appears. But if the back button is pressed, the menu isn't closed as you would expect.
     //Instead, the app is exited. This onBackPressed will fix this issue.
+    //Fix back button!!!!!
     @Override
     public void onBackPressed()
     {
@@ -226,14 +225,19 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
                 startActivity(new Intent(this, AddClothesToCategory.class));
                 break;
             case R.id.nav_goal:
-                //Take them to the activity that will allow the user to give a set goal to the categories they created.
+                /*Take them to the activity that will allow the user to give a set goal to the categories they created.
                 //They will select the category from the dropdown that they would like to set a goal for,
                 //Then they can set a number for that specific category. Example: They select pants as the category,
                 //Then they need to give a goal, let's say 20. Therefore in order to reach their goal, they would have to
                 //Take pictures of pants and store it under this category which will be displayed in a recycler view.
                 //If the have 20 pictures of pants that they collected, then they reached their goal.
+                 */
                 startActivity(new Intent(this, SetUserGoals.class));
                 break;
+            case R.id.nav_viewClothes:
+                startActivity(new Intent(this, ViewClothesActivity.class));
+                break;
+
         }
         drawerLayout.closeDrawer(GravityCompat.START); //If they tap anywhere else on the screen, the nav bar will close.
         return true;
