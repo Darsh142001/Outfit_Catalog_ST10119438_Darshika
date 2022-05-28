@@ -12,7 +12,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="140dp">
+            android:layout_height="160dp">
 
             <ImageView
                 android:id="@+id/image"
@@ -35,7 +35,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="120dp"
-                android:hint="Name:" />
+                android:hint="Name:"
+                android:textStyle="bold"
+                android:textColor="#020154"/>
 
             <TextView
                 android:id="@+id/clothesDescrip"
@@ -45,7 +47,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="8dp"
-                android:hint="description" />
+                android:hint="description"
+                android:textColor="#020154"/>
 
             <ImageButton
                 android:id="@+id/deleteClothesBtn"
