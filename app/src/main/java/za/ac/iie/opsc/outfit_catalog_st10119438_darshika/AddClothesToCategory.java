@@ -227,6 +227,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     private String clothingName="" , description="", category="";
     public void uploadPicClick(View v)
     {
+        long timestamp = System.currentTimeMillis();
         //Validate data
         //validateData();
         clothingName = nameOfClothes.getText().toString().trim();
@@ -259,6 +260,13 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
                 //When the image has successfully uploaded, we get its download url. (Uri can only be used on saved content.)
               // Uri uri = taskSnapshot.getDownloadUrl();//figure it out Darsh!!!
                // clothesRef.getDownloadUrl();
+                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                while(!uriTask.isSuccessful());
+                String uploadPictureUrl = ""+ uriTask.getResult();
+
+                //upload to firebase db
+                uploadPicInfoToDb(uploadPictureUrl, timestamp);
+
                 Toast.makeText(AddClothesToCategory.this,"Uploaded", Toast.LENGTH_SHORT).show();
             }
         });
@@ -300,9 +308,13 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
     }
 
+    public String selectedCategory, enteredDescription;
+
     public void uploadPicInfoToDb(String uploadPictureUrl, long timestamp)
     {
         //Step 3: Upload pic info to firebase db
+        selectedCategory = pickCategory.getText().toString().trim();
+        enteredDescription = descriptionOfClothes.getText().toString().trim();
 
         String uid = firebaseAuth.getUid();
 
@@ -311,8 +323,8 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         hashMap.put("uid", ""+uid);
         hashMap.put("id", ""+timestamp);
         hashMap.put("name", ""+clothingName);
-        hashMap.put("description", ""+description);
-        hashMap.put("category", ""+category);
+        hashMap.put("description", ""+enteredDescription);
+        hashMap.put("category", ""+selectedCategory);
         hashMap.put("url", ""+uploadPictureUrl);
         hashMap.put("timestamp", +timestamp);
 
