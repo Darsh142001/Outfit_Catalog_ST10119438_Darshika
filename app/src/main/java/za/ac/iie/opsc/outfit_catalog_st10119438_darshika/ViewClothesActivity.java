@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 public class ViewClothesActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton backToMain;
+
     ArrayList<ModelCategory> categoryArrayList;
     FirebaseAuth firebaseAuth;
 
@@ -31,6 +33,8 @@ public class ViewClothesActivity extends AppCompatActivity implements View.OnCli
 
     ArrayList<ViewClothesCategory> clothesArrayList;
     ViewClothesAdapter adapterViewClothes;
+
+    RecyclerView displayClothesRecyclerV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +44,14 @@ public class ViewClothesActivity extends AppCompatActivity implements View.OnCli
 
         loadCategories();
 
+        loadViewClothesCategory();
+
         pickCat = findViewById(R.id.pickCategoryToView);
 
         backToMain = findViewById(R.id.backToMainBtn);
         backToMain.setOnClickListener(this);
+
+        displayClothesRecyclerV = findViewById(R.id.clothesRecyclerV);
     }
 
     @Override
@@ -119,34 +127,35 @@ public class ViewClothesActivity extends AppCompatActivity implements View.OnCli
     }
 
     //Need to create a method that will retrieve the data and display it in a recycler view.
-    /*
+
 public void loadViewClothesCategory()
 {
 
     clothesArrayList = new ArrayList<>();
-    FirebaseUser user = mAuth.getCurrentUser();
+    FirebaseUser user = firebaseAuth.getCurrentUser();
+    //String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Goals");
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Clothes");
     ref.addValueEventListener(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
             //clear arraylist before adding data into it
             clothesArrayList.clear();
             for(DataSnapshot ds: snapshot.getChildren()){ //A DataSnapshot instance contains data from a Firebase Database location. Any time you read Database data, you receive the data as a DataSnapshot.
-                GoalSetForSelectedCategory goalCategory = ds.getValue(GoalSetForSelectedCategory.class);
-                if(user.getEmail().equals(goalCategory.getEmail()))
+                ViewClothesCategory clothesCat = ds.getValue(ViewClothesCategory.class);
+                if(user.getUid().equals(clothesCat.getUid()))
                 {
                     //Add to arraylist
-                    clothesArrayList.add(goalCategory);
+                    clothesArrayList.add(clothesCat);
                 }
                 //I think the If statement should go here: We need to only bring back the categories for the user that is logged in.
                 //Therefore, only that specific user will see their categories that they added or add.
 
             }
             //setup adapter
-            adapterGoalSet = new AdapterGoalSet(SetUserGoals.this, goalsSetArrayList);
+            adapterViewClothes = new ViewClothesAdapter(ViewClothesActivity.this, clothesArrayList);
             //set adapter to recyclerView
-            displayGoalsRecyclerView.setAdapter(adapterGoalSet); //this will display the categories that the user added.
+            displayClothesRecyclerV.setAdapter(adapterViewClothes); //this will display the categories that the user added.
 
         }
 
@@ -157,7 +166,7 @@ public void loadViewClothesCategory()
     });
 
 }
-*/
+
 
     @Override
     public void onBackPressed() //Therefore user cannot press the back button on their phone. they have to use the icon.
