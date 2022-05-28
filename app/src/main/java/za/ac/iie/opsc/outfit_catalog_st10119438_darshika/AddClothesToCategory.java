@@ -58,7 +58,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
 
     private static final int REQUEST_IMAGE_CAPTURE =0;
     private static final int REQUEST_IMAGE_CAPTURE_PERMISSION =100;
-     String IMAGEFOLDER="ImagesFolder";
+
 
     FirebaseAuth firebaseAuth;
     FirebaseStorage mStorage;
@@ -228,8 +228,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     public void uploadPicClick(View v)
     {
         long timestamp = System.currentTimeMillis();
-        //Validate data
-        //validateData();
+
         clothingName = nameOfClothes.getText().toString().trim();
         StorageReference ref = mStorage.getReferenceFromUrl("gs://outfitcatalog-c22ae.appspot.com");
         StorageReference clothesRef = ref.child(clothingName+".jpg"); //pass name of the image + .jpg //"pants.jpg"
@@ -258,7 +257,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 //When the image has successfully uploaded, we get its download url. (Uri can only be used on saved content.)
-              // Uri uri = taskSnapshot.getDownloadUrl();//figure it out Darsh!!!
+              // Uri uri = taskSnapshot.getDownloadUrl();//
                // clothesRef.getDownloadUrl();
                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                 while(!uriTask.isSuccessful());
@@ -272,41 +271,6 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         });
     }
 
-    public void uploadToStorage()
-    {
-        //Step 2: Upload picture to firebase storage.
-        //timestamp
-        long timestamp = System.currentTimeMillis();
-
-        //path of pictures in firebase storage
-        String filePathAndName = "Clothes/"+ timestamp;
-
-        //Storage reference
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
-        storageReference.putFile(imageUri) //this part here i don't understand??
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                        //get picture url
-                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                        while(!uriTask.isSuccessful());
-                        String uploadPictureUrl = ""+ uriTask.getResult();
-
-                        //upload to firebase db
-                        uploadPicInfoToDb(uploadPictureUrl, timestamp);
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddClothesToCategory.this, "Failed to upload due to "+e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
-    }
 
     public String selectedCategory, enteredDescription;
 
