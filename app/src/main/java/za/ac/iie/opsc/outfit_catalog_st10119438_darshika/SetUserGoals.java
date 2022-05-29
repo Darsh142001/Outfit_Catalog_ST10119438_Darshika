@@ -184,7 +184,7 @@ public class SetUserGoals extends AppCompatActivity implements View.OnClickListe
     The java.util.HashMap.put() method of HashMap is used to insert a mapping into a map.
     This means we can insert a specific key and the value it is mapping to into a particular map.
     If an existing key is passed then the previous value gets replaced by the new value.
-    If a new pair is passed, then the pair gets inserted as a whole.
+    If a new pair is passed, then the pair gets inserted as a whole (GeeksforGeeks, 2022).
      */
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("id", ""+timestamp);

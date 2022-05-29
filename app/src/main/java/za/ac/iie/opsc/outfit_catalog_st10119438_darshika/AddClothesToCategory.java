@@ -161,6 +161,12 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         }
 
         //alert dialog
+        /*
+        Javapoint, (2021) mentions that Android AlertDialog can be used to display the dialog message with OK and Cancel buttons.
+        It can be used to interrupt and ask the user about his/her choice to continue or discontinue.
+        Android AlertDialog is composed of three regions: title, content area and action buttons.
+        Android AlertDialog is the subclass of Dialog class.
+         */
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pick Category")
                 .setItems(categoriesArray, new DialogInterface.OnClickListener(){
