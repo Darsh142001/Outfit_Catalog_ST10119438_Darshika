@@ -238,6 +238,11 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
                 startActivity(new Intent(this, ViewClothesActivity.class));
                 break;
 
+            case R.id.nav_profile:
+                startActivity(new Intent(this, UserProfileActivity.class));
+                break;
+
+
         }
         drawerLayout.closeDrawer(GravityCompat.START); //If they tap anywhere else on the screen, the nav bar will close.
         return true;

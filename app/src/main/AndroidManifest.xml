@@ -12,6 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Outfit_Catalog_ST10119438_Darshika">
+        <activity android:name=".UserProfileActivity"
+            android:exported="false"/>
         <activity android:name=".ViewClothesActivity"
             android:exported="false"/>
         <activity android:name=".SetUserGoals"
