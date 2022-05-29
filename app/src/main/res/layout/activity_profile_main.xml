@@ -93,12 +93,13 @@
             android:layout_marginLeft="5dp"/>
 
         <TextView
+            android:id="@+id/displayUserNameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Full Name"
-            android:textSize="18dp"
             android:layout_marginLeft="25dp"
-            android:textColor="@android:color/darker_gray"/>
+            android:hint="Full Name"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
@@ -134,12 +135,13 @@
             android:layout_marginLeft="5dp"/>
 
         <TextView
+            android:id="@+id/displayUserEmailTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="email@gmail.com"
-            android:textSize="18dp"
             android:layout_marginLeft="25dp"
-            android:textColor="@android:color/darker_gray"/>
+            android:hint="email@gmail.com"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
