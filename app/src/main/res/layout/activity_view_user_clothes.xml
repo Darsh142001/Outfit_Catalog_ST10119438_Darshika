@@ -75,13 +75,13 @@
 
 
         <View
-            android:layout_width="401dp"
+            android:layout_width="wrap_content"
             android:layout_height="3dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="524dp"
             android:background="#020154" />

@@ -64,6 +64,8 @@ public class ViewClothesActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+
+
     public void pickCategoryToViewClick(View v)
     {
         //get string array of categories from arraylist
