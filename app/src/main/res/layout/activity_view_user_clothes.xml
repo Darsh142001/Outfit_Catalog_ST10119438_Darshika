@@ -62,13 +62,14 @@
             android:gravity="center_horizontal"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/searchBtn"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="-580dp"
             android:background="@drawable/rounded_button_drawable"
             android:drawableEnd="@drawable/ic_baseline_search_24"
+            android:onClick="searchClick"
             android:text="Search"
             android:textColor="#020154"
             android:textStyle="bold" />

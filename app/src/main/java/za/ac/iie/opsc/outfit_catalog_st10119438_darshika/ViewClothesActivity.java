@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -36,6 +37,8 @@ public class ViewClothesActivity extends AppCompatActivity implements View.OnCli
 
     RecyclerView displayClothesRecyclerV;
 
+    Button searchByCategory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,8 @@ public class ViewClothesActivity extends AppCompatActivity implements View.OnCli
         backToMain.setOnClickListener(this);
 
         displayClothesRecyclerV = findViewById(R.id.clothesRecyclerV);
+
+        searchByCategory = findViewById(R.id.searchBtn);
     }
 
     @Override
@@ -62,6 +67,47 @@ public class ViewClothesActivity extends AppCompatActivity implements View.OnCli
                 startActivity(new Intent(this, ClothesCategory.class)); //This will go back to the activity with the nav bar.
                 break;
         }
+    }
+
+    //This method will search/filter certain images that belong to a certain category. If user only wants to display pants for example, then
+    //user must pick the pants category and then click search. Only pictures that have been saved under the pants category will be displayed.
+    String pickedCategory;
+    public void searchClick(View v)
+    {
+        pickedCategory = pickCat.getText().toString().trim();
+        clothesArrayList = new ArrayList<>();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        //String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Clothes");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //clear arraylist before adding data into it
+                clothesArrayList.clear();
+                for(DataSnapshot ds: snapshot.getChildren()){ //A DataSnapshot instance contains data from a Firebase Database location. Any time you read Database data, you receive the data as a DataSnapshot.
+                    ViewClothesCategory clothesCat = ds.getValue(ViewClothesCategory.class);
+                    if(pickedCategory.equals(clothesCat.getCategory()) && user.getUid().equals(clothesCat.getUid()))
+                    {
+                        //Add to arraylist
+                        clothesArrayList.add(clothesCat);
+                    }
+
+                }
+                //setup adapter
+                adapterViewClothes = new ViewClothesAdapter(ViewClothesActivity.this, clothesArrayList);
+                //set adapter to recyclerView
+                displayClothesRecyclerV.setAdapter(adapterViewClothes); //this will display the categories that the user added.
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 
