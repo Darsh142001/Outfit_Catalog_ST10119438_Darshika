@@ -241,6 +241,9 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
             case R.id.nav_profile:
                 startActivity(new Intent(this, UserProfileActivity.class));
                 break;
+            case R.id.nav_game:
+                startActivity(new Intent(this, GameActivity.class));
+                break;
 
 
         }

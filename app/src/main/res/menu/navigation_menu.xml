@@ -24,6 +24,10 @@
             android:icon="@drawable/ic_baseline_exit_to_app_24"
             android:title="Logout" />
         <item
+            android:id="@+id/nav_game"
+            android:icon="@drawable/ic_baseline_videogame_asset_24"
+            android:title="Game" />
+        <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_baseline_info_24"
             android:title="About" />

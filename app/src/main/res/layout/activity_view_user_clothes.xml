@@ -70,7 +70,7 @@
             android:background="@drawable/rounded_button_drawable"
             android:drawableEnd="@drawable/ic_baseline_search_24"
             android:onClick="searchClick"
-            android:text="Search"
+            android:text="Filter"
             android:textColor="#020154"
             android:textStyle="bold" />
 
