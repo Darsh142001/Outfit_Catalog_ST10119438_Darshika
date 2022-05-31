@@ -1,12 +1,17 @@
 package za.ac.iie.opsc.outfit_catalog_st10119438_darshika;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+
+    ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +24,9 @@ public class GameActivity extends AppCompatActivity {
         ImageView towels2 = (ImageView) findViewById(R.id.towels2);
         ImageView ribbon1 = (ImageView) findViewById(R.id.ribbon1);
         ImageView ribbon2 = (ImageView) findViewById(R.id.ribbon2);
+
+        back = findViewById(R.id.backToMainBtn);
+        back.setOnClickListener(this);
 
 
         percentage1.setOnClickListener(new View.OnClickListener() {
@@ -34,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               percentage1.setImageResource(R.drawable.circlestyle2);
+                percentage1.setImageResource(R.drawable.circlestyle2);
                 percentage2.setImageResource(R.drawable.circlestyle2);
             }
         });
@@ -75,6 +83,14 @@ public class GameActivity extends AppCompatActivity {
             }
         });
     }
-}
 
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.backToMainBtn:
+                startActivity(new Intent(this, ClothesCategory.class)); //This will go back to the activity with the nav bar.
+                break;
+        }
+
+    }
+}
 
