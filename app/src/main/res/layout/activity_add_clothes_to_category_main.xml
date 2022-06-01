@@ -110,7 +110,7 @@
             android:clickable="true"
             android:onClick="fabBtnClick"
             android:src="@drawable/ic_baseline_photo_camera_24"
-            app:backgroundTint="#F9AC19" />
+            app:backgroundTint="#6f6f6f" />
 
         <Button
             android:id="@+id/uploadPicBtn"

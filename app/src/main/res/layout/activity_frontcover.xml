@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#d9d9d9"
     tools:context=".FrontCoverActivity">
 
     <TextView
@@ -67,5 +68,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/new_logo" />
+        app:srcCompat="@drawable/new_logo3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
