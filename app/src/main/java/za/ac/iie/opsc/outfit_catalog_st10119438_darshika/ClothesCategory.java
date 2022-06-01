@@ -219,7 +219,9 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
             case R.id.nav_logout:
                 FirebaseAuth.getInstance().signOut();
                 //Logout of the app.
-                startActivity(new Intent(this,  FrontCoverActivity.class));
+                Intent frontCOver = new Intent(this,FrontCoverActivity.class);
+                frontCOver.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(frontCOver);
                 break;
             case R.id.nav_addClothes:
                 //Take them to the activity that will allow them to add clothes and select the category they would like to save that picture to.

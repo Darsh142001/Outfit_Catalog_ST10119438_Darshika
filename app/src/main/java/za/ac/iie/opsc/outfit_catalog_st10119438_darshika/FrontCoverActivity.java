@@ -56,6 +56,7 @@ public class FrontCoverActivity extends AppCompatActivity implements View.OnClic
         {
             backToast.cancel();
             super.onBackPressed();
+
             return;
         }else{
             backToast= Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
