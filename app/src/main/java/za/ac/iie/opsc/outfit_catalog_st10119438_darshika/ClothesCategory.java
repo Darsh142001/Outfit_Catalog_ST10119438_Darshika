@@ -62,6 +62,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_with_nav_drawer);
         mAuth = FirebaseAuth.getInstance();
+        setTitle(" ");
 
         //this method will load and display the category's that the user created in a recycler view.
         loadCategories();

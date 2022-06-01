@@ -71,7 +71,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     private Uri imageUri = null;
     Bitmap bitmap;
 
-
+    private  boolean hasImageBeenSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +113,8 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     {
         categoryPickDialog(); //When the user has selected the category they want, it will display in the textview.
     }
+
+
 
     //This method will bring all the categories that the user added and display it as a dropdown menu.
     public void loadClotheCategories()
@@ -209,6 +211,7 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
         if(requestCode == REQUEST_IMAGE_CAPTURE && data !=null){
             bitmap = (Bitmap) data.getExtras().get("data");
             imgCameraImage.setImageBitmap(bitmap);
+             hasImageBeenSet=true;
         }
     }
 
@@ -226,11 +229,41 @@ public class AddClothesToCategory extends AppCompatActivity implements View.OnCl
     }
 
 
+
+
     //Need to upload the picture with the name, description and category to the database.
     private String clothingName="" , description="", category="";
 
     public void uploadPicClick(View v)
     {
+
+        clothingName = nameOfClothes.getText().toString().trim();
+        description = descriptionOfClothes.getText().toString().trim();
+        category = pickCategory.getText().toString().trim();
+
+        if(clothingName.isEmpty())
+        {
+            nameOfClothes.setError("Name of clothing is required");
+            nameOfClothes.requestFocus();
+            return;
+        }
+        if(description.isEmpty())
+        {
+            descriptionOfClothes.setError("Description is required");
+            descriptionOfClothes.requestFocus();
+            return;
+        }
+        if(category.isEmpty())
+        {
+            pickCategory.setError("Category is required");
+            pickCategory.requestFocus();
+            return;
+        }
+
+        if(!hasImageBeenSet){
+            Toast.makeText(AddClothesToCategory.this, "Need to take a picture", Toast.LENGTH_SHORT).show();
+            return;
+        }
         long timestamp = System.currentTimeMillis();
 
         clothingName = nameOfClothes.getText().toString().trim();
