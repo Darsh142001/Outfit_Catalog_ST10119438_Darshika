@@ -15,6 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
+    //This class will allow the user to reset their password if they forgot.
+    //It will prompt the user for their email, once they click the reset button, an email will be sent.
+    //User must check their emails, either under inbox or spam folder, once they found the email...
+    //they must click on the link and the user will be able to reset their pasword.
+    //(see #1 Login and registration android app tutorial using firebase authentication-create user - CodeWithMazn, 2020).
     EditText email;
     Button resetPassword;
     FirebaseAuth auth;

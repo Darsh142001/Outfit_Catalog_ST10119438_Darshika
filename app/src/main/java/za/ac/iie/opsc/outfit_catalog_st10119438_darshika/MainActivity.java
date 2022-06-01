@@ -19,8 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    //Going to need to use this url when it comes to authentication and adding users to realtime database:
-    // https://www.youtube.com/watch?v=Z-RE1QuUWPg&list=PL65Ccv9j4eZJ_bg0TlmxA7ZNbS8IMyl5i&index=4
+   //This class will allow the user to login after they have registered.
+    //(see #1 Login and registration android app tutorial using firebase authentication-create user - CodeWithMazn, 2020).
 
     private FirebaseAuth mAuth;
 

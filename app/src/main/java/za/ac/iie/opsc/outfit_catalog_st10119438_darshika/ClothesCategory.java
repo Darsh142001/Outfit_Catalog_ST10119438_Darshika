@@ -3,6 +3,7 @@ package za.ac.iie.opsc.outfit_catalog_st10119438_darshika;
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,9 +63,12 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_with_nav_drawer);
         mAuth = FirebaseAuth.getInstance();
-        setTitle(" ");
+        setTitle("O:Catalague");
+        //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"white\">" + getString(R.string.app_name) + "</font>"));
+
 
         //this method will load and display the category's that the user created in a recycler view.
+        //(see Book app firebase | 03 Add book category | Android studio | java - Atif Pervaiz, 2021)
         loadCategories();
 
         //Navigation bar.
@@ -111,8 +115,9 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
 
     }
 }
-
-    private void addCategoryToFirebase() //this method will add the category the user created to firebase and be stored under Categories.
+    //this method will add the category the user created to firebase and be stored under Categories.
+   //(see Book app firebase | 03 Add book category | Android studio | java - Atif Pervaiz, 2021)
+    private void addCategoryToFirebase()
     {
         FirebaseUser user = mAuth.getCurrentUser();
         //get timestamp.
@@ -158,7 +163,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
     //This method will basically bring back what is displayed in the database,
     // to be displayed in the activity_main_with_nav_bar activity in the recycler view.
     //Therefore, the user can see what categories they added.
-    //Need to load only the categories of the logged in user.
+    //Need to load only the categories of the logged in user (see Book app firebase | 03 Add book category | Android studio | java - Atif Pervaiz, 2021).
     private void loadCategories(){
         //init arraylist
         categoryArrayList = new ArrayList<>();
@@ -198,7 +203,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
 
     //The menu appears. But if the back button is pressed, the menu isn't closed as you would expect.
     //Instead, the app is exited. This onBackPressed will fix this issue.
-    //Fix back button!!!!!
+    //(The Independent Institute of Education, 2022).
     @Override
     public void onBackPressed()
     {
@@ -212,7 +217,7 @@ public class ClothesCategory extends AppCompatActivity implements  NavigationVie
     }
 
     //This method used called only when the items from the nav bar are clicked on.
-    //It will direct the user to the correct activity.
+    //It will direct the user to the correct activity (The Independent Institute of Education, 2022).
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item){
         switch(item.getItemId()){

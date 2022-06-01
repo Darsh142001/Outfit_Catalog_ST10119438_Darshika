@@ -19,7 +19,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
     TextView fullName;
     TextView email;
-
+//Only for teh final POE.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

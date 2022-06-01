@@ -20,6 +20,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
+    //Before user can utilize this app, they would first have to register.
+    //They must fill out all the fields, once they have done that,
+    //the user must check their emails, as a link will be sent for them to verify their email.
+    //The email could be in the inbox or spam folder. Once they found the email, they must click the link.
+    //That will verify them.
+    //(see #1 Login and registration android app tutorial using firebase authentication-create user - CodeWithMazn, 2020).
     private FirebaseAuth mAuth;
 
     FirebaseDatabase firebaseDatabase;
@@ -68,6 +74,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     }
 
     //This method will register the users.
+    //(see #1 Login and registration android app tutorial using firebase authentication-create user - CodeWithMazn, 2020).
     private void RegisterUser()
     {
        String fullName = userFullName.getText().toString().trim();

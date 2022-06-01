@@ -28,6 +28,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.MyView
 //This class is used to help display the categories that the user created in a recycler view.
 //It is shown in the activity_main_with_nav_drawer.xml.
 // Reads data from various sources, converts it into View objects and provide it to linked Adapter view for display
+//(see Book app firebase | 03 Add book category | Android studio | java - Atif Pervaiz, 2021)
     Context context;
     ArrayList<ModelCategory> categoryList;
 

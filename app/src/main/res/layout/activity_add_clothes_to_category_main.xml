@@ -110,7 +110,7 @@
             android:clickable="true"
             android:onClick="fabBtnClick"
             android:src="@drawable/ic_baseline_photo_camera_24"
-            app:backgroundTint="#6f6f6f" />
+            app:backgroundTint="#000000" />
 
         <Button
             android:id="@+id/uploadPicBtn"
@@ -121,7 +121,7 @@
             android:background="@drawable/rounded_button_drawable"
             android:onClick="uploadPicClick"
             android:text="upload "
-            android:textColor="#020154"
+            android:textColor="#ffffff"
             android:textStyle="bold" />
 
 

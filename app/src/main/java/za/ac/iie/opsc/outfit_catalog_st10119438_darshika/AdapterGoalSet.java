@@ -22,6 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class AdapterGoalSet extends RecyclerView.Adapter<AdapterGoalSet.MyViewHolder> {
+    //This class will bring back the data from the firebase and display the data in a recycler view so that user
+    //can see the goal they set for each category.
+    //(see Book app firebase | 03 Add book category | Android studio | java - Atif Pervaiz, 2021)
 
     Context context;
     ArrayList<GoalSetForSelectedCategory>goalSetArrayList;

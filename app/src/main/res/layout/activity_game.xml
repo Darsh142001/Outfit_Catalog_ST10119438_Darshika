@@ -38,7 +38,7 @@
             android:layout_height="58dp"
             android:gravity="center_horizontal"
             android:text="Try to spot the difference"
-            android:textColor="#020154"
+            android:textColor="#000000"
             android:textSize="22sp"
             android:textStyle="bold" />
 
