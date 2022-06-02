@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ClothesCategory extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
-
+//@color/purple_500
     private FirebaseAuth mAuth;
 
     //Nav bar
