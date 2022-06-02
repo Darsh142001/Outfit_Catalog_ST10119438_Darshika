@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //(See Spot the difference basic feature full code - android studio tutorial-Kevin's android coding tutorials, 2022).
     ImageButton back;
 
     @Override
